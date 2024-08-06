@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "login1";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<title>@ViewData["Title"] - Your App Name</title>*@
+    <style>
+        .image-button {
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 10px;
+        }
+
+            .image-button img {
+                width: 150px; /* Adjust the size as needed */
+                height: auto;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+
+            .image-button img:hover {
+                transform: scale(1.1);
+            }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between buttons */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Logged In</h1>
+        <p>LoggedIn</p>
+    </div>
+    <div class="button-container">
+        @*<form href="/food" onsubmit="handleClick();">
+            <input type="image" src="~/assets/food.png" width="300" height="300" class="image-button" />
+        </form>*@
+
+        <form method="get" action="/food">
+            <input type="image" src="~/assets/food.png" alt="Food" class="image-button" width="300" height="300" />
+        </form>
+
+        <form method="get" action="/Drink">
+            @*<button type="submit" class="image-button">
+                <img src="/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/Images/food.png" alt="Drink">
+            </button>*@
+
+            <form action="/food/Index" method="post" onsubmit="handleClick(); return false;">
+                <input type="image" src="~/assets/Drink.png" alt="Submit" width="300" height="300" class="image-button" />
+            </form>
+
+        </form>
+        <form action="/food" method="post" onsubmit="handleClick(); return false;">
+            <input type="image" src="~/assets/dessert.png" alt="Submit" width="300" height="300" class="image-button" />
+        </form>
+    </div>
+</body>
+</html>
+
