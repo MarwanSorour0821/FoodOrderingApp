@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/marwansorour/Projects/FoodApplication/FoodApplication
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/drink/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvZHJpbmsvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/food/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvZm9vZC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

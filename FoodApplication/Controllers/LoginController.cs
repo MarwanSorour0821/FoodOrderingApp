@@ -41,12 +41,11 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(userViewModel model)
         {
-
-
             var validation = await _context.users
                     .Where(a => a.EmployeeID == model.EmployeeID && a.password == model.password)
                     .FirstOrDefaultAsync();
 
+            //TODO: DEAL WITH NULL EXCEPTION HERE
             if (validation.isFirstLogin == true)
             {
                 HttpContext.Session.SetInt32("firstTimeLogger", validation.EmployeeID);
@@ -57,7 +56,6 @@ namespace FoodApplication.Controllers
             {
                 if (validation != null)
                 {
-
                     return RedirectToAction(nameof(login1));
                 }
                 else

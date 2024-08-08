@@ -20,6 +20,10 @@ namespace FoodApplication.Models
         public bool isFirstLogin { get; set; } = true;
 
 
+        public int RoleID { get; set; }
+        public Role role { get; set; }
+
+
         public ICollection<Order> orders;
 
 

@@ -1,0 +1,90 @@
+﻿@model FoodApplication.Models.drinkViewModel
+
+@{
+    ViewData["Title"] = "Drink";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Food</title>
+
+    <style>
+        div.scroll {
+            margin: 4px;
+            padding: 4px;
+            width: 800px;
+            height: 400px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align: justify;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .meal-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .meal-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .meal-info {
+            flex-grow: 1;
+        }
+
+        .meal-info h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .meal-info p {
+            margin: 5px 0;
+        }
+
+        .meal-info .price {
+                font-size: 18px;
+                font-weight: bold;
+                color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Select a Food Item</h1>
+        <form asp-action="Index" asp-controller="drink" method="post">
+            <div class="scroll">
+                @if (Model.drinkItems != null && Model.drinkItems.Any())
+                {
+                    @foreach (var drink in Model.drinkItems)
+                    {
+                        <div class="meal-box">
+                            <img src="@drink.productImage" alt="@drink.productName" />
+                            <div class="meal-info">
+                                <h2>@drink.productName</h2>
+                                <p>@drink.productInformation</p>
+                                <p class="price">@drink.productPrice.ToString("C")</p>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No Food Items Available.</p>
+                }
+            </div>
+        </form>
+    </center>
+</body>
+
+
+

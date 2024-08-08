@@ -6,33 +6,21 @@ using Application;
 using FoodApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FoodApplication.Controllers
 {
     public class setPassController : Controller
     {
-
-        //to get the id of the logged in user 
-        
-        
-
         private readonly ApplicationDbContext _context;
-        
-
 
         public setPassController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        
-
-
         // GET: /<controller>/
         public IActionResult Index(setPassViewModel model)
         {
-
             return View(model);
         }
 
@@ -49,18 +37,25 @@ namespace FoodApplication.Controllers
 
                 if (user != null)
                 {
-                    user.password = model.newPassword;
-                    user.isFirstLogin = false;
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    //check if confirm password and new password are equal, if not return the current page
 
-                    return RedirectToAction("Index", "Home");
+                    //TODO: HASH PASSWORD HERE 
+                    if (model.newPassword == model.confirmPassword)
+                    {
+                        user.password = model.newPassword;
+                        user.isFirstLogin = false;
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "setPass");
+                    }
+                    
                 }
             }
-
-
             return View(model);
-
         }
 
     }

@@ -18,12 +18,14 @@
     <None Remove="Views\Login\" />
     <None Remove="Views\food\" />
     <None Remove="Views\setPass\" />
+    <None Remove="Views\drink\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\assets\" />
     <Folder Include="Views\food\" />
     <Folder Include="Views\setPass\" />
+    <Folder Include="Views\drink\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />
