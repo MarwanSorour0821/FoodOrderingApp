@@ -17,11 +17,13 @@
   <ItemGroup>
     <None Remove="Views\Login\" />
     <None Remove="Views\food\" />
+    <None Remove="Views\setPass\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
     <Folder Include="wwwroot\assets\" />
     <Folder Include="Views\food\" />
+    <Folder Include="Views\setPass\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />

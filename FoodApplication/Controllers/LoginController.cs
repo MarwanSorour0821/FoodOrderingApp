@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Application;
+﻿using Application;
 using FoodApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +12,16 @@ namespace FoodApplication.Controllers
         private DateTime now;
         private Order currentOrder { get; set; }
         private OrderItem currentOrderItem { get; set; }
+        
+
+
 
         public LoginController(ApplicationDbContext context)
         {
             _context = context;
         }
+
+        
 
 
         // GET: /<controller>/
@@ -41,20 +42,21 @@ namespace FoodApplication.Controllers
         public async Task<ActionResult> Login(userViewModel model)
         {
 
-            if (ModelState.IsValid)
-            {
-                var validation = await _context.users
+
+            var validation = await _context.users
                     .Where(a => a.EmployeeID == model.EmployeeID && a.password == model.password)
                     .FirstOrDefaultAsync();
 
+            if (validation.isFirstLogin == true)
+            {
+                HttpContext.Session.SetInt32("firstTimeLogger", validation.EmployeeID);
+                return RedirectToAction("Index", "setPass");
+            }
+
+            if (ModelState.IsValid)
+            {
                 if (validation != null)
                 {
-                    // Log or breakpoint here
-                    Console.WriteLine("Login successful");
-                    //currentOrder.userID = validation.EmployeeID;
-                    //currentOrder.orderDate = TimeOnly.FromDateTime(now).ToString();
-                     
-
 
                     return RedirectToAction(nameof(login1));
                 }

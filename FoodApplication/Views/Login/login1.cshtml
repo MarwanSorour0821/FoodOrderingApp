@@ -43,19 +43,13 @@
         <p>LoggedIn</p>
     </div>
     <div class="button-container">
-        @*<form href="/food" onsubmit="handleClick();">
-            <input type="image" src="~/assets/food.png" width="300" height="300" class="image-button" />
-        </form>*@
 
         <form method="get" action="/food">
             <input type="image" src="~/assets/food.png" alt="Food" class="image-button" width="300" height="300" />
         </form>
 
         <form method="get" action="/Drink">
-            @*<button type="submit" class="image-button">
-                <img src="/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/Images/food.png" alt="Drink">
-            </button>*@
-
+            
             <form action="/food/Index" method="post" onsubmit="handleClick(); return false;">
                 <input type="image" src="~/assets/Drink.png" alt="Submit" width="300" height="300" class="image-button" />
             </form>

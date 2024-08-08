@@ -17,6 +17,7 @@ namespace FoodApplication.Models
         public Employee employee { get; set; }
         public string password { get; set; }
         //public Order orderHistory { get; set; }
+        public bool isFirstLogin { get; set; } = true;
 
 
         public ICollection<Order> orders;

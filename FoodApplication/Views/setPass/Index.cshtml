@@ -1,0 +1,32 @@
+﻿@model setPassViewModel
+
+@{
+    ViewData["Title"] = "Set Password";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Your App Name</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Set Your Password</h2>
+        <form asp-action="SetPassword" method="post">
+            <div class="form-group">
+                <label asp-for="newPassword">New Password</label>
+                <input asp-for="newPassword" class="form-control" type="password" />
+                <span asp-validation-for="newPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="confirmPassword">Confirm Password</label>
+                <input asp-for="confirmPassword" class="form-control" type="password" />
+                <span asp-validation-for="confirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Set Password</button>
+        </form>
+    </div>
+</body>
+</html>
