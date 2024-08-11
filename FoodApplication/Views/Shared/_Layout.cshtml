@@ -25,32 +25,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body" bis_skin_checked="1">
-                    <div class="text-center" bis_skin_checked="1">
+
+                        @*If the user is an admin*@
+
                         @{
-                            if (ViewData["User"] == null)
-                            {
-                                <a asp-controller="Login" asp-action="Index" target="_blank" bis_skin_checked="1">
-                                    @*<img width="200px" height="200px" src="@($"{"/assets/icon"}/{item.Icon}")" alt="@item.Name" />*@
-
-                                </a>
-                            }
-                            else
-                            {
-                                @*<a href="@($"{"/assets/pdf"}/{item.Pdf}")" target="_blank" bis_skin_checked="1">
-                                    <img width="200px" height="200px" src="@($"{"/assets/icon"}/{item.Icon}")" alt="@item.Name" />
-
-                                </a>*@
-                            }
+                            var userRole = Context.Session.GetInt32("UserRole");
                         }
 
-
-                    </div>
+                        @if (userRole == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Admin">Admin</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -63,11 +51,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - FoodApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

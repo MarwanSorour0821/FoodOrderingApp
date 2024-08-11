@@ -18,7 +18,7 @@ namespace FoodApplication.Models
         public string password { get; set; }
         //public Order orderHistory { get; set; }
         public bool isFirstLogin { get; set; } = true;
-
+        public string Email { get; set; }
 
         public int RoleID { get; set; }
         public Role role { get; set; }

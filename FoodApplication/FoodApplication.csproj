@@ -19,6 +19,7 @@
     <None Remove="Views\food\" />
     <None Remove="Views\setPass\" />
     <None Remove="Views\drink\" />
+    <None Remove="Views\ForgotPassword\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
@@ -26,6 +27,7 @@
     <Folder Include="Views\food\" />
     <Folder Include="Views\setPass\" />
     <Folder Include="Views\drink\" />
+    <Folder Include="Views\ForgotPassword\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />

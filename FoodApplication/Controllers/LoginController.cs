@@ -12,17 +12,11 @@ namespace FoodApplication.Controllers
         private DateTime now;
         private Order currentOrder { get; set; }
         private OrderItem currentOrderItem { get; set; }
-        
-
-
 
         public LoginController(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        
-
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -36,7 +30,6 @@ namespace FoodApplication.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(userViewModel model)
@@ -45,7 +38,13 @@ namespace FoodApplication.Controllers
                     .Where(a => a.EmployeeID == model.EmployeeID && a.password == model.password)
                     .FirstOrDefaultAsync();
 
-            //TODO: DEAL WITH NULL EXCEPTION HERE
+            if (validation == null)
+            {
+                Console.WriteLine("Invalid login attempt");
+                ModelState.TryAddModelError(string.Empty, "Invalid login attempt");
+                return View("Index", model);
+            }
+
             if (validation.isFirstLogin == true)
             {
                 HttpContext.Session.SetInt32("firstTimeLogger", validation.EmployeeID);
@@ -54,17 +53,8 @@ namespace FoodApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                if (validation != null)
-                {
-                    return RedirectToAction(nameof(login1));
-                }
-                else
-                {
-                    // Log or breakpoint here
-                    Console.WriteLine("Invalid login attempt");
-                    ModelState.TryAddModelError(string.Empty, "Invalid login attempt");
-                    return View("Index", model);
-                }
+                HttpContext.Session.SetInt32("UserRole", validation.RoleID);
+                return RedirectToAction(nameof(login1));
             }
 
             return View("Index", model);

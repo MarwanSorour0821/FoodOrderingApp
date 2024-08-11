@@ -1,0 +1,12 @@
+﻿@model FoodApplication.Models.forgotPasswordViewModel
+
+<h2>Verify OTP</h2>
+
+<form asp-action="VerifyOTP" method="post">
+    <div class="form-group">
+        <label asp-for="OTP"></label>
+        <input asp-for="OTP" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary" href="ForgotPassword/ChangePassword">Verify OTP</button>
+    
+</form>
