@@ -119,11 +119,11 @@ namespace FoodApplication.Controllers
         public async Task<IActionResult> ChangePassword(forgotPasswordViewModel model)
         {
 
-            var employee = _context.employees.Where(e => e.Email == model.Email).SingleOrDefault();
-            var user = _context.users.SingleOrDefault(u => u.Email == model.Email);
+            var employee = _context.employees.Where(e => e.Id == model.EmployeeID);
+            var user = await _context.users.Where(a => a.EmployeeID == model.EmployeeID).FirstOrDefaultAsync();
 
             if (employee != null && user != null)
-                {
+            {
                     // TODO: Hash and set the new password
                     user.password = model.NewPassword; // Replace with hashed password
                     _context.Update(user);
@@ -131,12 +131,12 @@ namespace FoodApplication.Controllers
 
                     // Redirect to a confirmation page or login page
                     return RedirectToAction("Index", "Home");
-                }
+            }
 
-                ModelState.AddModelError("", "Invalid email address.");
+             ModelState.AddModelError("", "Invalid email address.");
             
 
-            return View("Index", model);
+             return View("Index", model);
         }
 
 

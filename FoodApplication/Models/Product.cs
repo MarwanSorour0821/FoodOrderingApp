@@ -14,9 +14,7 @@ namespace FoodApplication.Models
 
         public OrderItem orderItem { get; set; }
 
-        public Product()
-		{
-		}
+        
 	}
 }
 

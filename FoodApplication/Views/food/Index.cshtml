@@ -9,6 +9,7 @@
     <title>Food</title>
 
     <style>
+        /* Your existing CSS styles */
         div.scroll {
             margin: 4px;
             padding: 4px;
@@ -30,31 +31,89 @@
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
 
-        .meal-box img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin-right: 20px;
-        }
+            .meal-box img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                margin-right: 20px;
+            }
 
         .meal-info {
             flex-grow: 1;
         }
 
-        .meal-info h2 {
-            margin: 0;
-            font-size: 24px;
-        }
+            .meal-info h2 {
+                margin: 0;
+                font-size: 24px;
+            }
 
-        .meal-info p {
-            margin: 5px 0;
-        }
+            .meal-info p {
+                margin: 5px 0;
+            }
 
-        .meal-info .price {
+            .meal-info .price {
                 font-size: 18px;
                 font-weight: bold;
                 color: #28a745;
+            }
+
+        .add-to-cart-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
         }
+
+            .add-to-cart-btn:hover {
+                background-color: #0056b3;
+            }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+
+            .quantity-btn:hover {
+                background-color: #0056b3;
+            }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+        }
+
+        .view-cart-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+            .view-cart-btn:hover {
+                background-color: #218838;
+            }
     </style>
 </head>
 
@@ -68,11 +127,18 @@
                     @foreach (var meal in Model.FoodItems)
                     {
                         <div class="meal-box">
+                            <input type="hidden" value="@meal.id" id="mealId" />
                             <img src="@meal.productImage" alt="@meal.productName" />
                             <div class="meal-info">
                                 <h2>@meal.productName</h2>
                                 <p>@meal.productInformation</p>
                                 <p class="price">@meal.productPrice.ToString("C")</p>
+                                <button type="button" class="add-to-cart-btn" onclick="addcart(@meal.id)">Add to Cart</button>
+                                <div class="quantity-controls">
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(@meal.id, -1)">-</button>
+                                    <input type="text" id="quantity_@meal.id" class="quantity-input" value="1" readonly />
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(@meal.id, 1)">+</button>
+                                </div>
                             </div>
                         </div>
                     }
@@ -83,7 +149,80 @@
                 }
             </div>
         </form>
+
+        <a href="/cart" class="view-cart-btn">View Cart</a>
     </center>
+
+    <script type="text/javascript">
+
+        function updateQuantity(mealId, change) {
+            var quantityInput = document.getElementById('quantity_' + mealId);
+            var currentQuantity = parseInt(quantityInput.value);
+            var newQuantity = currentQuantity + change;
+
+            if (newQuantity < 1) {
+                newQuantity = 1; // Prevent quantity from going below 1
+            }
+
+            quantityInput.value = newQuantity;
+        }
+
+        // Define the addcart function
+        function addcart(mealId) {
+            var url = '@Url.Content("~/")' + "Cart/AddProductToCartAsync";
+            console.log(url);
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { id: mealId },
+                success: function (data) {
+                    if (data.success) {
+                        alert('Product added to cart!');
+                        GetTotalPrice();  // Update total price
+                        Price(id);  // Update price for the specific item
+                        Total();  // Update overall totals
+                    } else {
+                        alert('Could not add product to cart: ' + data.message);
+                    }
+                },
+                error: function () {
+                    alert('There was an error adding the product to the cart.');
+                }
+            });
+        }
+
+        function GetTotalPrice() {
+            $.ajax({
+                url: '@Url.Action("GetTotalPrice", "Cart")',
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalPrice !== undefined) {
+                        document.getElementById("total-price").innerHTML = response.totalPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Price(id) {
+            $.ajax({
+                url: '@Url.Action("Price", "Cart")/' + id,
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalItemPrice !== undefined) {
+                        document.getElementById("TotalItem_" + id).innerHTML = response.totalItemPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Total() {
+            GetTotalPrice();
+        }
+
+
+    </script>
+
 </body>
 
 

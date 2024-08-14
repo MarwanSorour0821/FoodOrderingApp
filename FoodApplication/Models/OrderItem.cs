@@ -11,12 +11,13 @@ namespace FoodApplication.Models
         public Product product { get; set; }
 
         public int itemQuantity { get; set; }
-        
+
+        public int productPrice { get; set; }
         
         public int orderID;
         public Order order { get; set; }
 
-        public OrderItem() { }
+        
 		
 	}
 }

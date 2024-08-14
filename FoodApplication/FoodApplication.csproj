@@ -13,6 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Login\" />
@@ -20,6 +21,7 @@
     <None Remove="Views\setPass\" />
     <None Remove="Views\drink\" />
     <None Remove="Views\ForgotPassword\" />
+    <None Remove="Helper\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
@@ -28,6 +30,7 @@
     <Folder Include="Views\setPass\" />
     <Folder Include="Views\drink\" />
     <Folder Include="Views\ForgotPassword\" />
+    <Folder Include="Helper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />

@@ -23,6 +23,7 @@ namespace FoodApplication.Controllers
             var model = new foodViewModel
             {
                 FoodItems = _context.products.Where(a => a.productCategory.Equals("Food")).Select(a => new Product {
+                       id = a.id,
                        productName = a.productName,
                        productInformation = a.productInformation,
                        productPrice = a.productPrice,

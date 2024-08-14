@@ -63,3 +63,4 @@
 /Users/marwansorour/Projects/FoodApplication/FoodApplication/obj/Debug/net6.0/FoodApplication.pdb
 /Users/marwansorour/Projects/FoodApplication/FoodApplication/obj/Debug/net6.0/FoodApplication.genruntimeconfig.cache
 /Users/marwansorour/Projects/FoodApplication/FoodApplication/obj/Debug/net6.0/ref/FoodApplication.dll
+/Users/marwansorour/Projects/FoodApplication/FoodApplication/bin/Debug/net6.0/Newtonsoft.Json.dll

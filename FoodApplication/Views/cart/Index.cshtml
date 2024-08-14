@@ -1,0 +1,45 @@
+﻿@model List<OrderItem>
+<h2>Your Cart</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.productID</td>
+                    <td>@item.productPrice</td>
+                    <td>@item.itemQuantity</td>
+                    <td>@(item.productPrice * item.itemQuantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <script>// Update prices when the page loads
+            $(document).ready(function () {
+                Total();
+            });
+        </script>
+    </div>
+    @*<script>
+        // Update prices when the page loads
+        $(document).ready(function () {
+            Total();
+        });
+    </script>*@
+
+}
