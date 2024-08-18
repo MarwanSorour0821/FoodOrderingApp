@@ -14,7 +14,7 @@
             margin: 4px;
             padding: 4px;
             width: 800px;
-            height: 400px;
+            height: 800px;
             overflow-x: hidden;
             overflow-y: auto;
             text-align: justify;
@@ -159,9 +159,9 @@
             var quantityInput = document.getElementById('quantity_' + mealId);
             var currentQuantity = parseInt(quantityInput.value);
             var newQuantity = currentQuantity + change;
-
-            if (newQuantity < 1) {
-                newQuantity = 1; // Prevent quantity from going below 1
+            if (newQuantity < 0) {
+                //alert("Cannot not remove more quantity");
+                newQuantity = 0;
             }
 
             quantityInput.value = newQuantity;
@@ -169,13 +169,14 @@
 
         // Define the addcart function
         function addcart(mealId) {
+            var quantity = document.getElementById('quantity_' + mealId).value;
             var url = '@Url.Content("~/")' + "Cart/AddProductToCartAsync";
             console.log(url);
 
             $.ajax({
                 url: url,
                 type: "GET",
-                data: { id: mealId },
+                data: { id: mealId, quantity: quantity },
                 success: function (data) {
                     if (data.success) {
                         alert('Product added to cart!');

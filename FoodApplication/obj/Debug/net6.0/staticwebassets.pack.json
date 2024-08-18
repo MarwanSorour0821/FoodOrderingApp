@@ -5,10 +5,6 @@
       "PackagePath": "staticwebassets/FoodApplication.bundle.scp.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/.DS_Store",
-      "PackagePath": "staticwebassets/.DS_Store"
-    },
-    {
       "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/Drink.png",
       "PackagePath": "staticwebassets/assets/Drink.png"
     },

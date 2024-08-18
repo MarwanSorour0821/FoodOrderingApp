@@ -10,6 +10,8 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FoodApplication
 build_property.RootNamespace = FoodApplication
 build_property.ProjectDir = /Users/marwansorour/Projects/FoodApplication/FoodApplication/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
@@ -18,6 +20,10 @@ build_property._RazorSourceGeneratorDebug =
 
 [/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvY2FydC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/cart/OrderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvY2FydC9PcmRlckRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/drink/Index.cshtml]
@@ -54,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/Login/login1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vbG9naW4xLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/order/OrderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3Mvb3JkZXIvT3JkZXJEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/marwansorour/Projects/FoodApplication/FoodApplication/Views/setPass/Index.cshtml]

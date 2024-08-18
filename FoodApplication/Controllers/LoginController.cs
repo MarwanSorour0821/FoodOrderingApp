@@ -48,14 +48,18 @@ namespace FoodApplication.Controllers
             if (validation.isFirstLogin == true)
             {
                 HttpContext.Session.SetInt32("firstTimeLogger", validation.EmployeeID);
+                HttpContext.Session.SetString("EMAIL", validation.Email);
                 return RedirectToAction("Index", "setPass");
             }
 
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetInt32("UserRole", validation.RoleID);
+                HttpContext.Session.SetString("EMAIL", validation.Email);
                 return RedirectToAction(nameof(login1));
             }
+
+            HttpContext.Session.SetString("EMAIL", validation.Email);
 
             return View("Index", model);
         }

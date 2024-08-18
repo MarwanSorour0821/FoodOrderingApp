@@ -1,44 +1,49 @@
 ﻿<Properties StartupConfiguration="{CDA7D474-416F-496C-A61D-7AA94744BC2D}|Default">
+  <MonoDevelop.Ide.ItemProperties.FoodApplication PreferredExecutionTarget="/Volumes/Arc/Arc.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.FoodApplication PreferredExecutionTarget="/Volumes/Arc/Arc.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="FoodApplication/Views/Login/login1.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FoodApplication/Controllers/CartController.cs">
     <Files>
-      <File FileName="FoodApplication/Models/User.cs" Line="19" Column="50" />
-      <File FileName="FoodApplication/Controllers/LoginController.cs" Line="9" Column="1" />
-      <File FileName="FoodApplication/ApplicationDbContext.cs" Line="21" Column="4" />
-      <File FileName="FoodApplication/Views/Login/Index.cshtml" Line="30" Column="8" />
-      <File FileName="FoodApplication/Views/Home/Index.cshtml" Line="28" Column="11" />
-      <File FileName="FoodApplication/Views/Login/login1.cshtml" Line="13" Column="1" />
-      <File FileName="FoodApplication/Models/Product.cs" Line="20" Column="1" />
+      <File FileName="FoodApplication/Views/cart/Index.cshtml" />
+      <File FileName="FoodApplication/Views/food/Index.cshtml" />
+      <File FileName="FoodApplication/Views/Login/login1.cshtml" />
+      <File FileName="FoodApplication/Program.cs" />
+      <File FileName="FoodApplication/Models/foodViewModel.cs" />
+      <File FileName="FoodApplication/Controllers/foodController.cs" />
+      <File FileName="FoodApplication/Controllers/drinkController.cs" />
+      <File FileName="FoodApplication/Controllers/CartController.cs" Line="339" Column="13" />
+      <File FileName="FoodApplication/Models/Order.cs" />
+      <File FileName="FoodApplication/Controllers/OrderController.cs" />
+      <File FileName="FoodApplication/Views/cart/OrderDetails.cshtml" />
+      <File FileName="FoodApplication/ApplicationDbContext.cs" />
+      <File FileName="FoodApplication/Controllers/LoginController.cs" />
+      <File FileName="FoodApplication/Controllers/setPassController.cs" />
+      <File FileName="FoodApplication/Views/ForgotPassword/VerifyOTP.cshtml" />
+      <File FileName="FoodApplication/Views/ForgotPassword/ChangePassword.cshtml" />
+      <File FileName="FoodApplication/Views/ForgotPassword/Index.cshtml" />
+      <File FileName="FoodApplication/Models/forgotPasswordViewModel.cs" />
+      <File FileName="FoodApplication/Views/order/OrderDetails.cshtml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="FoodApplication" expanded="True">
             <Node name="FoodApplication" expanded="True">
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Images" expanded="True" />
-                <Node name="Login" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="CartController.cs" selected="True" />
               </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="assets" expanded="True" />
-                <Node name="css" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="cart" expanded="True" />
+                <Node name="food" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>
