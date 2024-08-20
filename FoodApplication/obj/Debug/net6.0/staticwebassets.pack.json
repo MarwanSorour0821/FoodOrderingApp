@@ -5,12 +5,16 @@
       "PackagePath": "staticwebassets/FoodApplication.bundle.scp.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/Drink.png",
-      "PackagePath": "staticwebassets/assets/Drink.png"
+      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/dessertHoriz.png",
+      "PackagePath": "staticwebassets/assets/dessertHoriz.png"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/dessert.png",
-      "PackagePath": "staticwebassets/assets/dessert.png"
+      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/drinkHoriz.png",
+      "PackagePath": "staticwebassets/assets/drinkHoriz.png"
+    },
+    {
+      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/horizFood.jpg",
+      "PackagePath": "staticwebassets/assets/horizFood.jpg"
     },
     {
       "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/css/site.css",
@@ -19,6 +23,14 @@
     {
       "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg",
+      "PackagePath": "staticwebassets/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg"
+    },
+    {
+      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/images/ced1c42e-65ba-4305-b023-1e9db7d8a740.jpeg",
+      "PackagePath": "staticwebassets/images/ced1c42e-65ba-4305-b023-1e9db7d8a740.jpeg"
     },
     {
       "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/js/site.js",

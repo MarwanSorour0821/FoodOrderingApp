@@ -1,74 +1,138 @@
 ﻿@model FoodApplication.Models.Order
 
-<h2>Order Details</h2>
-
-
-<p>Order Date: @Model.orderDate</p>
-<p>Total Price: @Model.totalPrice.ToString("C")</p>
-<p>Status: @Model.status</p>
-
-<h3>Order Items</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.orderItems)
-        {
-            <tr>
-                <td>@item.productID</td>
-                <td>@item.productPrice</td>
-                <td>@item.itemQuantity</td>
-                <td>@(item.productPrice * item.itemQuantity)</td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #1B263B; /* Navy blue background */
+            color: #FFFFFF; /* White text */
+            font-family: 'Arial', sans-serif;
         }
-    </tbody>
-</table>
 
-<button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
+        h2, h3 {
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
 
+        p {
+            font-size: 18px;
+            text-align: center;
+        }
 
-<script type="text/javascript">
-        document.getElementById("placeOrderBtn").addEventListener("click", function() {
-            // Show alert
-            //alert("Your order has been placed!");
+        .table {
+            background-color: #FFFFFF; /* White background for table */
+            color: #1B263B; /* Navy blue text */
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
 
+            .table th, .table td {
+                text-align: center;
+                padding: 15px;
+            }
 
+            .table th {
+                background-color: #324A5E; /* Darker navy blue for headers */
+                color: #FFFFFF;
+            }
+
+            .table tbody tr:hover {
+                background-color: #E5E9F0; /* Light grey for hover effect */
+            }
+
+        .btn, button {
+            background-color: #1B263B;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn:hover, button:hover {
+                background-color: #324A5E;
+            }
+
+            .btn:focus, button:focus {
+                outline: none;
+            }
+
+        #placeOrderBtn {
+            display: block;
+            margin: 20px auto;
+            background-color: #4C6E91;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            #placeOrderBtn:hover {
+                background-color: #36557C;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Details</h2>
+
+        <p>Order Date: @Model.orderDate</p>
+        <p>Total Price: @Model.totalPrice EGP</p>
+        <p>Status: @Model.status</p>
+
+        <h3>Order Items</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.orderItems)
+                {
+                    <tr>
+                        <td>@item.productID</td>
+                        <td>@item.productPrice</td>
+                        <td>@item.itemQuantity</td>
+                        <td>@(item.productPrice * item.itemQuantity) EGP</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        document.getElementById("placeOrderBtn").addEventListener("click", function () {
             $.ajax({
-                    url: '@Url.Content("~/")' + "Cart/PlaceOrder",
-                    type: 'POST',
-                    
-                    success: function (data) {
-                        if (data.success) {
-                            // Update the total price for the item
-
-                            console.log("QR Code sent to email");
-                        } else {
-                            alert('Order not placed');
-                        }
-                    },
-                    error: function () {
-                        alert('There was an error updating the quantity.');
+                url: '@Url.Content("~/")' + "Cart/PlaceOrder",
+                type: 'POST',
+                success: function (data) {
+                    if (data.success) {
+                        console.log("QR Code sent to email");
+                        alert("Your order has been placed!");
+                    } else {
+                        alert('Order not placed: ' + data.message);
                     }
-                });
-
-            // Send request to create QR code and send email
-            //fetch('/Cart/PlaceOrder', {
-            //    method: 'POST'
-            //}).then(response => response.json)
-            //  .then(data => {
-            //      if (data.success) {
-            //          console.log("QR code sent to email");
-            //      } else {
-            //          console.error("Failed to place order: ", data.message);
-            //      }
-            //  })
-            //  .catch(error => console.error('Error:', error));
+                },
+                error: function () {
+                    alert('There was an error placing the order.');
+                }
+            });
         });
-</script>
-
+    </script>
+</body>
+</html>

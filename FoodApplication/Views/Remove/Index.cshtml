@@ -1,0 +1,140 @@
+﻿@model IEnumerable<FoodApplication.Models.Product>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #002147; /* Dark Navy Blue */
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 2px solid #002147;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            background-color: #002147;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .search-button:hover {
+                background-color: #003366;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #002147;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .delete-button {
+            background-color: #d9534f;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .edit-button {
+            background-color: #002147;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .delete-button:hover {
+                background-color: #c9302c;
+            }
+
+        a {
+            color: #002147;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Products</h1>
+
+    <div class="search-container">
+        <form asp-action="Index" method="get">
+            <input type="text" name="searchString" class="search-bar" placeholder="Enter product name..." value="@ViewData["searchString"]">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.productName</td>
+                        <td>@item.productCategory</td>
+                        <td>@item.productPrice</td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" name="id" value="@item.id" />
+                                <button type="submit" asp-action="Delete" class="delete-button">Delete</button>
+                                <button type="submit" asp-controller="Remove" asp-action="adjust" class="edit-button">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No products found.</p>
+    }
+
+    <div>
+        <a href="Home/Admin1">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,90 +1,300 @@
-﻿@model FoodApplication.Models.drinkViewModel
+﻿@*@model FoodApplication.Models.drinkViewModel
+
+    @{
+        ViewData["Title"] = "Drink";
+    }
+
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Food</title>
+
+        <style>
+            div.scroll {
+                margin: 4px;
+                padding: 4px;
+                width: 800px;
+                height: 400px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                text-align: justify;
+                border: 1px solid #ccc;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+
+            .meal-box {
+                display: flex;
+                align-items: center;
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin-bottom: 10px;
+                box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            }
+
+            .meal-box img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                margin-right: 20px;
+            }
+
+            .meal-info {
+                flex-grow: 1;
+            }
+
+            .meal-info h2 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+            .meal-info p {
+                margin: 5px 0;
+            }
+
+            .meal-info .price {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #28a745;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+            <h1>Select a Food Item</h1>
+            <form asp-action="Index" asp-controller="drink" method="post">
+                <div class="scroll">
+                    @if (Model.drinkItems != null && Model.drinkItems.Any())
+                    {
+                        @foreach (var drink in Model.drinkItems)
+                        {
+                            <div class="meal-box">
+                                <img src="@drink.productImage" alt="@drink.productName" />
+                                <div class="meal-info">
+                                    <h2>@drink.productName</h2>
+                                    <p>@drink.productInformation</p>
+                                    <p class="price">@drink.productPrice.ToString("C")</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Food Items Available.</p>
+                    }
+                </div>
+            </form>
+        </center>
+    </body>*@
+
+@model FoodApplication.Models.drinkViewModel
 
 @{
     ViewData["Title"] = "Drink";
 }
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Food</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drink</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        div.scroll {
-            margin: 4px;
-            padding: 4px;
-            width: 800px;
+        body {
+            background-color: #1B263B; /* Navy blue background */
+            color: #FFFFFF; /* White text */
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .scroll {
+            margin: 20px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 900px;
             height: 400px;
-            overflow-x: hidden;
             overflow-y: auto;
-            text-align: justify;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #FFFFFF; /* White background for scroll area */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
         .meal-box {
             display: flex;
             align-items: center;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
+            background-color: #E5E9F0; /* Light grey for meal boxes */
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
 
-        .meal-box img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin-right: 20px;
-        }
+            .meal-box img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-right: 20px;
+            }
 
         .meal-info {
             flex-grow: 1;
+            color: #1B263B; /* Navy blue text for meal info */
         }
 
-        .meal-info h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .meal-info p {
-            margin: 5px 0;
-        }
-
-        .meal-info .price {
-                font-size: 18px;
+            .meal-info h2 {
+                margin: 0;
+                font-size: 22px;
                 font-weight: bold;
-                color: #28a745;
+                color: #1B263B; /* Navy blue text */
+            }
+
+            .meal-info p {
+                margin: 5px 0;
+                font-size: 16px;
+            }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745; /* Green color for the price */
         }
+
+        .btn, button {
+            background-color: #1B263B;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn:hover, button:hover {
+                background-color: #324A5E;
+            }
+
+            .btn:focus, button:focus {
+                outline: none;
+            }
     </style>
 </head>
 
 <body>
     <center>
         <h1>Select a Food Item</h1>
-        <form asp-action="Index" asp-controller="drink" method="post">
+        <form asp-action="Index" asp-controller="food" method="post">
             <div class="scroll">
                 @if (Model.drinkItems != null && Model.drinkItems.Any())
                 {
-                    @foreach (var drink in Model.drinkItems)
+                    @foreach (var meal in Model.drinkItems)
                     {
                         <div class="meal-box">
-                            <img src="@drink.productImage" alt="@drink.productName" />
+                            <input type="hidden" value="@meal.id" id="mealId" />
+                            <img src="@meal.productImage" alt="@meal.productName" />
                             <div class="meal-info">
-                                <h2>@drink.productName</h2>
-                                <p>@drink.productInformation</p>
-                                <p class="price">@drink.productPrice.ToString("C")</p>
+                                <h2>@meal.productName</h2>
+                                <p>@meal.productInformation</p>
+                                <p class="price">@meal.productPrice.ToString("C")</p>
+                                <button type="button" class="add-to-cart-btn" onclick="addcart(@meal.id)">Add to Cart</button>
+                                <div class="quantity-controls">
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(@meal.id, -1)">-</button>
+                                    <input type="text" id="quantity_@meal.id" class="quantity-input" value="1" readonly />
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(@meal.id, 1)">+</button>
+                                </div>
                             </div>
                         </div>
                     }
                 }
                 else
                 {
-                    <p>No Food Items Available.</p>
+                    <p>No food items available.</p>
                 }
             </div>
         </form>
+
+        <a href="/cart" class="view-cart-btn">View Cart</a>
     </center>
+
+    <script type="text/javascript">
+
+        function updateQuantity(mealId, change) {
+            var quantityInput = document.getElementById('quantity_' + mealId);
+            var currentQuantity = parseInt(quantityInput.value);
+            var newQuantity = currentQuantity + change;
+            if (newQuantity < 0) {
+                //alert("Cannot not remove more quantity");
+                newQuantity = 0;
+            }
+
+            quantityInput.value = newQuantity;
+        }
+
+        // Define the addcart function
+        function addcart(mealId) {
+            var quantity = document.getElementById('quantity_' + mealId).value;
+            var url = '@Url.Content("~/")' + "Cart/AddProductToCartAsync";
+            console.log(url);
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { id: mealId, quantity: quantity },
+                success: function (data) {
+                    if (data.success) {
+                        alert('Product added to cart!');
+                        GetTotalPrice();  // Update total price
+                        Price(id);  // Update price for the specific item
+                        Total();  // Update overall totals
+                    } else {
+                        alert('Could not add product to cart: ' + data.message);
+                    }
+                },
+                error: function () {
+                    alert('There was an error adding the product to the cart.');
+                }
+            });
+        }
+
+        function GetTotalPrice() {
+            $.ajax({
+                url: '@Url.Action("GetTotalPrice", "Cart")',
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalPrice !== undefined) {
+                        document.getElementById("total-price").innerHTML = response.totalPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Price(id) {
+            $.ajax({
+                url: '@Url.Action("Price", "Cart")/' + id,
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalItemPrice !== undefined) {
+                        document.getElementById("TotalItem_" + id).innerHTML = response.totalItemPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Total() {
+            GetTotalPrice();
+        }
+
+
+    </script>
+
 </body>
+
 
 
 

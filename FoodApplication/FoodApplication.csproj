@@ -26,6 +26,7 @@
     <None Remove="Views\ForgotPassword\" />
     <None Remove="Helper\" />
     <None Remove="Views\order\" />
+    <None Remove="Views\Remove\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
@@ -36,6 +37,7 @@
     <Folder Include="Views\ForgotPassword\" />
     <Folder Include="Helper\" />
     <Folder Include="Views\order\" />
+    <Folder Include="Views\Remove\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />

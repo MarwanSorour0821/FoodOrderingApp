@@ -1,0 +1,139 @@
+﻿@model FoodApplication.Models.creatViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .text {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            color: #002244; /* Dark navy blue */
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+/*            height: 20px;*/
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        button[type="submit"] {
+            background-color: #002244; /* Dark navy blue */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #001530; /* Slightly darker navy blue */
+            }
+
+        a {
+            color: #002244; /* Dark navy blue */
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+    <form asp-controller="Remove" asp-action="edit" method="post" enctype="multipart/form-data">
+        <h1 class="text">Add Product</h1>
+        <div>
+            <label asp-for="productName">Product Name:</label>
+            <input asp-for="productName" type="text" />
+            <span asp-validation-for="productName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="productCategory">Product Category:</label>
+            <select asp-for="productCategory">
+                <option value="">-- Select Category --</option>
+                <option value="Food">Food</option>
+                <option value="Drink">Drink</option>
+                <option value="Dessert">Dessert</option>
+            </select>
+            <span asp-validation-for="productCategory" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="productPrice">Product Price:</label>
+            <input asp-for="productPrice" type="number" />
+            <span asp-validation-for="productPrice" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="productStock">Product Stock:</label>
+            <input asp-for="productStock" type="number" />
+            <span asp-validation-for="productStock" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="productInformation">Product Information:</label>
+            <textarea asp-for="productInformation"></textarea>
+            <span asp-validation-for="productInformation" class="text-danger"></span>
+        </div>
+
+        <div>
+            <button type="submit">Submit Product</button>
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index">Back</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
+

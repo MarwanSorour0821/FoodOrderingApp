@@ -187,46 +187,6 @@ namespace FoodApplication.Controllers
         [Route("CreateOrder")]
         public IActionResult CreateOrder()
         {
-            //// Get cart items from session
-            //var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
-            //int id = 0;
-
-            //foreach (OrderItem item in cart)
-            //{
-            //    id = item.orderID;
-
-            //};
-
-
-            //if (cart.Count == 0)
-            //{
-            //    return Json(new { success = false, message = "Your cart is empty." });
-            //}
-
-
-
-            //var orderDate = DateTime.Now.ToString("yyyy-MM-dd");
-            //var status = "Pending";
-            //var orderItems = cart;
-            //var totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
-
-
-
-            //await _context.SaveChangesAsync();
-
-            //// Clear the cart after placing the order
-            //HttpContext.Session.SetObjectAsJson(orderSession, new List<OrderItem>());
-
-            //return Json(new { success = true, orderId = orders.Id });
-
-
-            // Retrieve the order from session
-            //var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
-            //if (order == null)
-            //{
-            //    return Json(new { success = false, message = "No active order." });
-            //}
-
             // Retrieve the cart items from the session
             var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
@@ -310,8 +270,6 @@ namespace FoodApplication.Controllers
             //return Json(new { success = false, message = "Order not found." });
             // Assuming you have a method to get the current order
 
-            
-
             var order = HttpContext.Session.GetObjectFromJson<Order>("Orders");
 
             if (order == null)
@@ -323,8 +281,8 @@ namespace FoodApplication.Controllers
             // You need to implement this method
 
             // Send email with the QR code
-            var emailSent = SendOrderConfirmationEmail(); // Implement this method
-
+            var emailSent = SendOrderConfirmationEmail(order); // Implement this method
+            var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             if (emailSent == null)
             {
                 return Json(new { success = false, message = "Failed to send email." });
@@ -333,22 +291,30 @@ namespace FoodApplication.Controllers
             // Clear the session after placing the order
             //HttpContext.Session.Remove("CartItems");
 
+            foreach(OrderItem item in cart)
+            {
+                var product = _context.products.SingleOrDefault(a => a.id == item.productID);
+                product.productStock = product.productStock - item.itemQuantity;
+                _context.Update(product);
+                _context.SaveChanges();
+            }
+
             return Json(new { success = true });
         }
 
         // Example of how to generate a QR code (using QRCoder library)
-        private string GenerateQrCode()
+        private string GenerateQrCode(Order order)
         {
-            string qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Order";
+            string qrCodeUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Order{order.Id}";
             return qrCodeUrl;
         }
 
         // Example of how to send an email (using your email service)
-        private bool SendOrderConfirmationEmail()
+        private bool SendOrderConfirmationEmail(Order order)
         {
-            string qrCodeUrl = GenerateQrCode();
+            string qrCodeUrl = GenerateQrCode(order);
             string emailBody = $"<p>Thank you for your order! Here is your QR code:</p><img src='{qrCodeUrl}' />";
-            var fromAddress = new MailAddress("thetechonomicpost@gmail.com", "foodApp");
+            var fromAddress = new MailAddress("thetechonomicpost@gmail.com", "Butler & Co.");
             const string fromPassword = "jtde diti xxal cmwn";
             var toEmail = HttpContext.Session.GetString("EMAIL");
             var toAddress = new MailAddress(toEmail);

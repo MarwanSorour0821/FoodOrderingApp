@@ -1,0 +1,59 @@
+﻿@model FoodApplication.Models.creatViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Actions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #002147; /* Dark Navy Blue */
+        }
+
+        .button {
+            background-color: #002147; /* Dark Navy Blue */
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color: #003366; /* Slightly lighter navy blue on hover */
+                color: white;
+            }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Actions</h1>
+    <div class="container">
+        <a href="/searchfororder" class="button">Search for Order</a>
+        <a asp-controller="Home" asp-action="Admin" class="button">Add Product</a>
+        <a asp-controller="Remove" asp-action="Index" class="button">Edit/Remove Product</a>
+    </div>
+
+    <div>
+        <a href="Home/Admin1" style="color: #002147; text-decoration: none;">Back to Home</a>
+    </div>
+</body>
+</html>

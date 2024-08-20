@@ -27,6 +27,7 @@ namespace FoodApplication.Controllers
             {
                 drinkItems = _context.products.Where(a => a.productCategory.Equals("Drink")).Select(a => new Product
                 {
+                    id = a.id,
                     productName = a.productName,
                     productInformation = a.productInformation,
                     productPrice = a.productPrice,

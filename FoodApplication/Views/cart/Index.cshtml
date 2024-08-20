@@ -1,79 +1,147 @@
 ﻿@model List<OrderItem>
-<h2>Your Cart</h2>
 
-@if (Model.Count == 0)
-{
-    <p>Your cart is empty.</p>
-}
-else
-{
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.productID</td>
-                <td>@item.productPrice.ToString("C")</td>
-
-                <td>
-                    <!-- Quantity controls -->
-                    <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
-                    <span id="quantity_@item.productID">@item.itemQuantity</span>
-                    <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
-                </td>
-                <td id="total_@item.productID">@((item.productPrice * item.itemQuantity).ToString("C"))</td>
-                <td>
-                    <!-- Remove button -->
-                    <p>@item.productID</p>
-                    <button type="button" onclick='removeItem(@item.productID)'>Remove</button>
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #1B263B; /* Navy blue background */
+            color: #FFFFFF; /* White text */
+            font-family: 'Arial', sans-serif;
         }
-    </tbody>
 
-    
-</table>
-<button type="button" onclick="orderNow()">Order Now</button>
-    
-<script type="text/javascript">// Update prices when the page loads
-            //$(document).ready(function () {
-            //    Total();
-            //});
-        function removeItem(productID) {
-            //alert('Removing Item');
+        h2 {
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
 
-                $.ajax({
-                    url : '@Url.Content("~/")' + "Cart/removeItem",
-                    type: 'GET',
-                    data: { productID: productID },
-                    success: function(data) {
-                        if (data.success) {
-                            location.reload(); // Reload the page to reflect changes
-                        } else {
-                            alert('Could not remove item: ' + data.message);
-                        }
-                    },
-                    error: function() {
-                        alert('There was an error removing the item.');
-                    }
-                });
+        .table {
+            background-color: #FFFFFF; /* White background for table */
+            color: #1B263B; /* Navy blue text */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+            .table th, .table td {
+                text-align: center;
+                padding: 15px;
             }
 
-        //function updateQuantity(productID) {
-        //    var quantityInput = document.getElementById('quantity_' + productID);
-        //    var currentQuantity = parseInt(quantityInput.value);
-        //    var newQuantity = currentQuantity;
+            .table th {
+                background-color: #324A5E; /* Darker navy blue for headers */
+                color: #FFFFFF;
+            }
 
-        //    quantityInput.value = newQuantity;
-        //}
+            .table tbody tr:hover {
+                background-color: #E5E9F0; /* Light grey for hover effect */
+            }
+
+        .btn, button {
+            background-color: #1B263B;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn:hover, button:hover {
+                background-color: #324A5E;
+            }
+
+            .btn:focus, button:focus {
+                outline: none;
+            }
+
+        #orderButton {
+            display: block;
+            margin: 20px auto;
+            background-color: #4C6E91;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            #orderButton:hover {
+                background-color: #36557C;
+            }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Cart</h2>
+
+        @if (Model.Count == 0)
+        {
+            <p>Your cart is empty.</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.productID</td>
+                            <td>@item.productPrice.ToString("C")</td>
+                            <td>
+                                <!-- Quantity controls -->
+                                <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                            </td>
+                            <td id="total_@item.productID">@((item.productPrice * item.itemQuantity).ToString("C"))</td>
+                            <td>
+                                <!-- Remove button -->
+                                <button type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function removeItem(productID) {
+            $.ajax({
+                url: '@Url.Content("~/")' + "Cart/removeItem",
+                type: 'GET',
+                data: { productID: productID },
+                success: function (data) {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Could not remove item: ' + data.message);
+                    }
+                },
+                error: function () {
+                    alert('There was an error removing the item.');
+                }
+            });
+        }
 
         function updateQuantity(productID, change) {
             var quantityElement = document.getElementById('quantity_' + productID);
@@ -81,17 +149,13 @@ else
             var newQuantity = currentQuantity + change;
 
             if (newQuantity > 0) {
-                // Update the UI
                 quantityElement.innerHTML = newQuantity;
-
-                // Send the updated quantity to the server
                 $.ajax({
                     url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
                     type: 'GET',
                     data: { productID: productID, newQuantity: newQuantity },
                     success: function (data) {
                         if (data.success) {
-                            // Update the total price for the item
                             var totalElement = document.getElementById('total_' + productID);
                             totalElement.innerHTML = (data.newTotalPrice).toFixed(2) + ' EGP';
                         } else {
@@ -107,48 +171,20 @@ else
             }
         }
 
-        //function orderNow() {
-            @*$.ajax({
-                url: '@Url.Content("~/")' + "Cart/CreateOrder",
-                type: 'POST',
-                success: function(data) {
-                    if (data.success) {
-
-                        window.location.href = '@Url.Content("~/")' + "Cart/OrderDetails";
-                    } else {
-                        alert('Failed to create order: ' + data.message);
-                    }
-                },
-                error: function() {
-                    alert('There was an error creating the order.');
-                }
-            });*@
-
-
-
-        //}
-
         function orderNow() {
             $.ajax({
                 url: '@Url.Content("~/")' + "Cart/CreateOrder",
                 type: 'POST',
-                success: function(data) {
+                success: function (data) {
                     if (data.success) {
                         var url = '@Url.Content("~/")' + "Cart/OrderDetails";
-                        console.log(url);
-                        // Now call another AJAX to get the order details
                         $.ajax({
                             url: url,
                             type: 'GET',
-
-                            //data: { orderId: data.orderId }, // Pass the order ID to the controller
                             success: function (response) {
-                                console.log(url);
-                                alert('order created');
-                                $('body').html(response); // Replace the body content with the OrderDetails view
+                                $('body').html(response);
                             },
                             error: function () {
-                                console.log(url);
                                 alert('Failed to load the order details.');
                             }
                         });
@@ -156,14 +192,11 @@ else
                         alert('Failed to create order: ' + data.message);
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('There was an error creating the order.');
                 }
             });
         }
-
-</script>
-    
-    
-
-}
+    </script>
+</body>
+</html>
