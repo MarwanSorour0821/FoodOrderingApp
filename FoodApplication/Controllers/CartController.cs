@@ -36,12 +36,14 @@ namespace FoodApplication.Controllers
         [Route("AddProductToCartAsync")]
         public async Task<IActionResult> AddProductToCartAsync(int? id, int quantity)
         {
-            //var product = await _context.products.Where(u => u.productName == model.productName).FirstOrDefaultAsync();
             var product = await _context.products.FindAsync(id);
+            var user = HttpContext.Session.GetInt32("ID");
 
             Order newOrder = new Order();
+            newOrder.userID = (int)user;
 
-            //ADD order to database
+            _context.orders.Add(newOrder);
+            await _context.SaveChangesAsync();
 
 
             if (product == null)
@@ -60,19 +62,6 @@ namespace FoodApplication.Controllers
 
             var existingProduct = cart.Find(c => c.productID == id);
 
-            //Order order = new Order();
-
-            //_context.orders.Add(order);
-            //_context.SaveChanges();
-
-
-
-
-            //if (existingProduct.itemQuantity == 0)
-            //{
-            //    return Json(new { success = false, message = "Cannot add item with quantity 0" });
-            //}
-
             if (existingProduct != null)
             {
                 existingProduct.itemQuantity++;
@@ -90,14 +79,11 @@ namespace FoodApplication.Controllers
                     itemQuantity = quantity,
                     productPrice = product.productPrice
                 });
-
-                
             }
+
             HttpContext.Session.SetObjectAsJson(orderSession, order);
-
-
-
             HttpContext.Session.SetObjectAsJson(CartSessionKey, cart);
+
             return Json(new { success = true });
         }
 
@@ -191,8 +177,6 @@ namespace FoodApplication.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
 
-
-
             if (cart.Count == 0)
             {
                 return Json(new { success = false, message = "Your cart is empty." });
@@ -219,17 +203,7 @@ namespace FoodApplication.Controllers
             order.totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
             //order.status = "Pending";
 
-
-            //// Save changes to the database
-
-
             HttpContext.Session.SetObjectAsJson(orderSession, order);
-
-
-
-            // Clear the cart and order session after placing the order
-            //HttpContext.Session.SetObjectAsJson(CartSessionKey, new List<OrderItem>());
-            //HttpContext.Session.Remove(orderSession);
 
             // Return the order ID for further processing, such as redirecting to the OrderDetails page
             return Json(new { success = true, orderId = order.Id });
@@ -239,16 +213,6 @@ namespace FoodApplication.Controllers
         [Route("OrderDetails")]
         public IActionResult OrderDetails()
         {
-            //var order = await _context.orders
-            //    .Include(o => o.orderItems)
-            //    .FirstOrDefaultAsync(o => o.Id == orderId);
-
-            //if (order == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return View(order);
 
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
             //_context.orders.Add(order);
@@ -267,18 +231,12 @@ namespace FoodApplication.Controllers
         [Route("PlaceOrder")]
         public IActionResult PlaceOrder()
         {
-            //return Json(new { success = false, message = "Order not found." });
-            // Assuming you have a method to get the current order
-
             var order = HttpContext.Session.GetObjectFromJson<Order>("Orders");
 
             if (order == null)
             {
                 return Json(new { success = false, message = "Order not found." });
             }
-
-            // Generate QR code (using a library like QRCoder)
-            // You need to implement this method
 
             // Send email with the QR code
             var emailSent = SendOrderConfirmationEmail(order); // Implement this method
@@ -319,16 +277,15 @@ namespace FoodApplication.Controllers
             var toEmail = HttpContext.Session.GetString("EMAIL");
             var toAddress = new MailAddress(toEmail);
 
-            try
+            
+            var client = new SmtpClient
             {
-                var client = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
-                    EnableSsl = true
-                };
+                Host = "smtp.gmail.com",
+                Port = 587,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                EnableSsl = true
+            };
 
                 client.SendMailAsync(new MailMessage(fromAddress, toAddress)
                 {
@@ -337,15 +294,8 @@ namespace FoodApplication.Controllers
                     IsBodyHtml = true
                 });
 
-
-
                 return true;
-            }
-            catch (Exception ex)
-            {
-                // Handle error (log it, show a message, etc.)
-                return false;
-            }
+
         }
 
     }

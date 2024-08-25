@@ -49,6 +49,7 @@ namespace FoodApplication.Controllers
             {
                 HttpContext.Session.SetInt32("firstTimeLogger", validation.EmployeeID);
                 HttpContext.Session.SetString("EMAIL", validation.Email);
+                HttpContext.Session.SetInt32("ID", validation.Id);
                 return RedirectToAction("Index", "setPass");
             }
 
@@ -56,6 +57,7 @@ namespace FoodApplication.Controllers
             {
                 HttpContext.Session.SetInt32("UserRole", validation.RoleID);
                 HttpContext.Session.SetString("EMAIL", validation.Email);
+                HttpContext.Session.SetInt32("ID", validation.Id);
                 return RedirectToAction(nameof(login1));
             }
 
