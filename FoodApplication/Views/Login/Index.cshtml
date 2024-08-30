@@ -1,20 +1,249 @@
-﻿@model FoodApplication.Models.userViewModel
+﻿@*@model FoodApplication.Models.userViewModel
+
+    @{
+        ViewData["Title"] = "Login";
+        Layout = "~/Views/Shared/loggedIN.cshtml";
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <style>
+            body {
+                font-family: 'Georgia', serif;
+                background-color: #FFFFFF; /* Background color similar to the screenshot */
+                color: #0E0D32;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 80px;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #0E0D32;
+            }
+
+            form {
+                width: 320px;
+                text-align: center;
+                align-content: center;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            label {
+                font-size: 18px;
+                margin-bottom: 8px;
+                text-align: left;
+                display: block;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #CCCCCC;
+                border-radius: 5px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            .btn-primary {
+                background-color: #0E0D32;
+                color: white;
+                padding: 15px;
+                width: 100%;
+                border: none;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+
+                .btn-primary:hover {
+                    background-color: #333366;
+                }
+
+            .form-text {
+                font-size: 12px;
+                color: #666;
+                text-align: left;
+                display: block;
+                margin-top: -10px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Butler & Co.</h1>
+        <div class="col-md-4"></div>
+
+        <div class="row" id="log">
+            <form asp-controller="Login" asp-action="Login" method="post">
+                <div class="form-group">
+                    <label asp-for="EmployeeID">Employee ID</label>
+                    <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />
+                    <span asp-validation-for="EmployeeID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="password">Password</label>
+                    <input asp-for="password" class="form-control" type="password" placeholder="Enter your password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <a href="/ForgotPassword" class="form-text">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    </html>*@
+
+@*@model FoodApplication.Models.userViewModel
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <style>
+            body {
+                font-family: 'Georgia', serif;
+                background-color: #EFEFD0; /* Pale Yellow for background */
+                color: #004E89; /* Dark Blue for main text */
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 80px;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #FF6B35; /* Bright Orange for the main heading */
+            }
+
+            form {
+                width: 320px;
+                text-align: center;
+                align-content: center;
+                background-color: #F7C59F; /* Light Peach for form background */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            label {
+                font-size: 18px;
+                margin-bottom: 8px;
+                display: block;
+                color: #004E89; /* Dark Blue for labels */
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #1A659E; /* Medium Blue for input border */
+                border-radius: 5px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            .btn-primary {
+                background-color: #004E89; /* Dark Blue for button background */
+                color: white;
+                padding: 15px;
+                width: 100%;
+                border: none;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+
+                .btn-primary:hover {
+                    background-color: #1A659E; /* Medium Blue on hover */
+                }
+
+            .form-text {
+                font-size: 12px;
+                color: #666;
+                text-align: left;
+                display: block;
+                margin-top: -10px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Butler & Co.</h1>
+        <div class="col-md-4"></div>
+
+        <div class="row" id="log">
+            <form asp-controller="Login" asp-action="Login" method="post">
+                <div class="form-group">
+                    <label asp-for="EmployeeID">Employee ID</label>
+                    <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />
+                    <span asp-validation-for="EmployeeID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="password">Password</label>
+                    <input asp-for="password" class="form-control" type="password" placeholder="Enter your password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <a href="/ForgotPassword" class="form-text">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    </html>*@
+
+@model FoodApplication.Models.userViewModel
 
 @{
     ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/loggedIN.cshtml";
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Login</title>
     <style>
         body {
             font-family: 'Georgia', serif;
-            background-color: #FFFFFF; /* Background color similar to the screenshot */
-            color: #0E0D32;
+            background-color: #004E89; /* Dark Blue background */
+            color: #EFEFD0; /* Pale Yellow text color */
             margin: 0;
             padding: 0;
             display: flex;
@@ -28,83 +257,105 @@
             font-size: 80px;
             text-align: center;
             margin-bottom: 40px;
-            color: #0E0D32;
+            color: #EFEFD0; /* Pale Yellow for the main heading */
         }
 
         form {
-            width: 320px;
+            width: 800px;
             text-align: center;
+            align-content: center;
+            background-color: #EFEFD0; /* Pale Yellow background for form */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #004E89; /* Dark Blue text inside the form */
         }
 
         .form-group {
             margin-bottom: 20px;
             text-align: left;
+            width: 100%; /* Make the form group elements take full width */
         }
 
         label {
             font-size: 18px;
             margin-bottom: 8px;
-            text-align: left;
             display: block;
+            color: #004E89; /* Dark Blue for labels */
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #CCCCCC;
+            border: 1px solid #004E89; /* Dark Blue for input border */
+            background-color: #EFEFD0; /* Pale Yellow background for inputs */
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
+            color: #004E89; /* Dark Blue text for inputs */
         }
 
         .btn-primary {
-            background-color: #0E0D32;
-            color: white;
+            background-color: #004E89; /* Dark Blue for button background */
+            color: #EFEFD0; /* Pale Yellow text */
             padding: 15px;
             width: 100%;
             border: none;
             border-radius: 5px;
             font-size: 18px;
+            font-weight: bold; /* Make button text bold */
             cursor: pointer;
             margin-top: 20px;
         }
 
             .btn-primary:hover {
-                background-color: #333366;
+                background-color: #F7C59F; /* Light Peach on hover */
             }
 
         .form-text {
             font-size: 12px;
-            color: #666;
+            color: #004E89; /* Dark Blue for helper text */
             text-align: left;
             display: block;
             margin-top: -10px;
             margin-bottom: 10px;
         }
+
+        a.form-text {
+            color: #FF6B35; /* Bright Orange for the link */
+            text-decoration: none;
+        }
+
+            a.form-text:hover {
+                color: #FF6B35; /* Bright Orange on hover */
+            }
     </style>
 </head>
 <body>
     <h1>Butler & Co.</h1>
-    <form asp-controller="Login" asp-action="Login" method="post">
-        <div class="form-group">
-            <label asp-for="EmployeeID">Employee ID</label>
-            <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />
-            <span asp-validation-for="EmployeeID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="password">Password</label>
-            <input asp-for="password" class="form-control" type="password" placeholder="Enter your password" />
-            <span asp-validation-for="password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <a href="/ForgotPassword" class="form-text">Forgot Password?</a>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Login</button>
-        </div>
-    </form>
+    <div class="col-md-4"></div>
+
+    <div class="row" id="log">
+        <form asp-controller="Login" asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="EmployeeID">Employee ID</label>
+                <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />
+                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password">Password</label>
+                <input asp-for="password" class="form-control" type="password" placeholder="Enter your password" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a href="/ForgotPassword" class="form-text">Forgot Password?</a>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
-
 

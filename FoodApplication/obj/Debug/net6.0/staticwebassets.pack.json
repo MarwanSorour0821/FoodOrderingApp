@@ -1,267 +1,303 @@
 {
   "Files": [
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/obj/Debug/net6.0/scopedcss/projectbundle/FoodApplication.bundle.scp.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/Debug/net6.0/scopedcss/projectbundle/FoodApplication.bundle.scp.css",
       "PackagePath": "staticwebassets/FoodApplication.bundle.scp.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/dessertHoriz.png",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/dessertHoriz.png",
       "PackagePath": "staticwebassets/assets/dessertHoriz.png"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/drinkHoriz.png",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/drinkHoriz.png",
       "PackagePath": "staticwebassets/assets/drinkHoriz.png"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/assets/horizFood.jpg",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/horizFood.jpg",
       "PackagePath": "staticwebassets/assets/horizFood.jpg"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/css/site.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/favicon.ico",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/028959fb-abd4-4b08-ab92-939464f1eccd.jpg",
+      "PackagePath": "staticwebassets/images/028959fb-abd4-4b08-ab92-939464f1eccd.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/1a432878-04fd-4167-81e5-c12dddc99e28.jpg",
+      "PackagePath": "staticwebassets/images/1a432878-04fd-4167-81e5-c12dddc99e28.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/7ea184cb-53a4-4abb-9024-279cfda22e03.jpeg",
+      "PackagePath": "staticwebassets/images/7ea184cb-53a4-4abb-9024-279cfda22e03.jpeg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg",
       "PackagePath": "staticwebassets/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/images/ced1c42e-65ba-4305-b023-1e9db7d8a740.jpeg",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/ae1a43a1-f75c-441d-b061-827779ca92ce.jpg",
+      "PackagePath": "staticwebassets/images/ae1a43a1-f75c-441d-b061-827779ca92ce.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/be245ed5-cc46-43bb-ab21-fb5f6a242d15.webp",
+      "PackagePath": "staticwebassets/images/be245ed5-cc46-43bb-ab21-fb5f6a242d15.webp"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/bf18ecaa-db77-4ccb-acd5-25956609eeff.jpg",
+      "PackagePath": "staticwebassets/images/bf18ecaa-db77-4ccb-acd5-25956609eeff.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/ced1c42e-65ba-4305-b023-1e9db7d8a740.jpeg",
       "PackagePath": "staticwebassets/images/ced1c42e-65ba-4305-b023-1e9db7d8a740.jpeg"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/js/site.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/d91c9994-b310-4e32-8beb-2c9ff6d840e0.jpg",
+      "PackagePath": "staticwebassets/images/d91c9994-b310-4e32-8beb-2c9ff6d840e0.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/f455e00f-da78-445e-b6fe-997a1c530275.jpg",
+      "PackagePath": "staticwebassets/images/f455e00f-da78-445e-b6fe-997a1c530275.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/ffac95d4-3f47-493d-8898-5595a60dcc25.jpg",
+      "PackagePath": "staticwebassets/images/ffac95d4-3f47-493d-8898-5595a60dcc25.jpg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/LICENSE",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/LICENSE",
       "PackagePath": "staticwebassets/lib/bootstrap"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation/LICENSE.md",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation/LICENSE.md",
       "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery/LICENSE.txt",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery/dist/jquery.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery/dist/jquery.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery/dist/jquery.min.js",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery/dist/jquery.min.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
     },
     {
-      "Id": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/wwwroot/lib/jquery/dist/jquery.min.map",
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {

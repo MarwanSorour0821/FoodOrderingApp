@@ -32,18 +32,56 @@ namespace FoodApplication.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("AddProductToCartAsync")]
         public async Task<IActionResult> AddProductToCartAsync(int? id, int quantity)
         {
             var product = await _context.products.FindAsync(id);
             var user = HttpContext.Session.GetInt32("ID");
+            var userInfo = await _context.users.FirstOrDefaultAsync(o => o.Id == user);
 
-            Order newOrder = new Order();
-            newOrder.userID = (int)user;
 
-            _context.orders.Add(newOrder);
-            await _context.SaveChangesAsync();
+            //Order newOrder = new Order();
+            //newOrder.userID = (int)userInfo.Id;
+
+            //try
+            //{
+            //    _context.orders.Add(newOrder);
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateException ex)
+            //{
+            //    var innerException = ex.InnerException?.Message;
+            //    return Json(new { success = false, message = $"Could not add product to cart: {innerException}" });
+            //}
+
+        //    var newOrder = await _context.orders
+        //.Where(o => o.userID == userInfo.Id && o.status == "Pending")
+        //.OrderByDescending(o => o.orderDate)
+        //.FirstOrDefaultAsync();
+
+            // If no existing pending order, create a new one
+            //if (newOrder == null)
+            //{
+            //    newOrder = new Order
+            //    {
+            //        userID = userInfo.Id,
+            //        orderDate = DateTime.Now.ToString("yyyy-MM-dd"),
+            //        status = "Pending",
+            //        totalPrice = 0 // This will be updated when items are added
+            //    };
+
+            //    try
+            //    {
+            //        _context.orders.Add(newOrder);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateException ex)
+            //    {
+            //        var innerException = ex.InnerException?.Message;
+            //        return Json(new { success = false, message = $"Could not add product to cart: {innerException}" });
+            //    }// Save the new order
+            //}
 
 
             if (product == null)
@@ -54,11 +92,16 @@ namespace FoodApplication.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession) ?? new Order
             {
-                Id = newOrder.Id,
+                //Id = newOrder.Id,
                 orderDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 status = "Pending",
                 orderItems = new List<OrderItem>()
             };
+
+            //var lastOrder = await _context.orders
+            //                      .Where(o => o.userID == userInfo.Id)
+            //                      .OrderByDescending(o => o.orderDate)
+            //                      .FirstOrDefaultAsync();
 
             var existingProduct = cart.Find(c => c.productID == id);
 
@@ -74,8 +117,9 @@ namespace FoodApplication.Controllers
             {
                 cart.Add(new OrderItem
                 {
-                    orderID = order.Id,
+                    //orderID = lastOrder.Id,
                     productID = product.id,
+                    productName = product.productName,
                     itemQuantity = quantity,
                     productPrice = product.productPrice
                 });
@@ -177,6 +221,16 @@ namespace FoodApplication.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
 
+            var user = HttpContext.Session.GetInt32("ID");
+            var userInfo = _context.users.FirstOrDefault(o => o.Id == user);
+
+            
+
+            //var lastOrder = _context.orders
+            //                      .Where(o => o.userID == userInfo.Id)
+            //                      .OrderByDescending(o => o.orderDate)
+            //                      .FirstOrDefault();
+
             if (cart.Count == 0)
             {
                 return Json(new { success = false, message = "Your cart is empty." });
@@ -193,8 +247,9 @@ namespace FoodApplication.Controllers
                 //order.orderItems.Add(item);
                 order.orderItems.Add(new OrderItem
                 {
-                    orderID = order.Id,
+                    //orderID = lastOrder.Id,
                     productID = item.productID,
+                    productName = item.productName,
                     itemQuantity = item.itemQuantity,
                     productPrice = item.productPrice
                 });
@@ -202,6 +257,13 @@ namespace FoodApplication.Controllers
             //order.orderDate = DateTime.Now.ToString("yyyy-MM-dd");
             order.totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
             //order.status = "Pending";
+
+            //lastOrder.orderDate = DateTime.Now.ToString("yyyy-MM-dd");
+            //lastOrder.status = "Pending";
+            //lastOrder.totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
+
+            //_context.orders.Update(lastOrder);
+            //_context.SaveChanges();
 
             HttpContext.Session.SetObjectAsJson(orderSession, order);
 
@@ -232,6 +294,31 @@ namespace FoodApplication.Controllers
         public IActionResult PlaceOrder()
         {
             var order = HttpContext.Session.GetObjectFromJson<Order>("Orders");
+            var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
+            var user = HttpContext.Session.GetInt32("ID");
+            var userInfo = _context.users.FirstOrDefault(o => o.Id == user);
+
+            Order newOrder = new Order();
+            newOrder.userID = userInfo.Id;
+            newOrder.orderDate = DateTime.Now.ToString("yyyy-MM-dd");
+            newOrder.status = "Pending";
+            newOrder.totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
+
+            _context.orders.Add(newOrder);
+            _context.SaveChanges();
+
+            //    {
+            //        userID = userInfo.Id,
+            //        orderDate = DateTime.Now.ToString("yyyy-MM-dd"),
+            //        status = "Pending",
+            //        totalPrice = 0 // This will be updated when items are added
+            //    };
+
+            var lastOrder = _context.orders
+                                  .Where(o => o.userID == userInfo.Id)
+                                  .OrderByDescending(o => o.Id)
+                                  .FirstOrDefault();
+            
 
             if (order == null)
             {
@@ -239,8 +326,8 @@ namespace FoodApplication.Controllers
             }
 
             // Send email with the QR code
-            var emailSent = SendOrderConfirmationEmail(order); // Implement this method
-            var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
+            var emailSent = SendOrderConfirmationEmail(lastOrder); // Implement this method
+            //var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             if (emailSent == null)
             {
                 return Json(new { success = false, message = "Failed to send email." });

@@ -57,7 +57,7 @@ namespace FoodApplication.Controllers
 
                 _context.products.Add(product);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Admin1", "Home");
 
             }
 

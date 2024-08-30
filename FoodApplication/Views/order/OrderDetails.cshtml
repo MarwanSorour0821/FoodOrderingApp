@@ -1,31 +1,181 @@
-﻿@model FoodApplication.Models.Order
+﻿@*@model FoodApplication.Models.Order
 
-<h2>Order Details</h2>
+    <h2>Order Details</h2>
 
-<p>Order ID: @Model.Id</p>
-<p>Order Date: @Model.orderDate</p>
-<p>Total Price: @Model.totalPrice.ToString("C")</p>
-<p>Status: @Model.status</p>
+    <p>Order ID: @Model.Id</p>
+    <p>Order Date: @Model.orderDate</p>
+    <p>Total Price: @Model.totalPrice.ToString("C")</p>
+    <p>Status: @Model.status</p>
 
-<h3>Order Items</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.orderItems)
-        {
+    <h3>Order Items</h3>
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.productID</td>
-                <td>@item.productPrice.ToString("C")</td>
-                <td>@item.itemQuantity</td>
-                <td>@(item.productPrice * item.itemQuantity).ToString("C")</td>
+                <th>Product ID</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.orderItems)
+            {
+                <tr>
+                    <td>@item.productID</td>
+                    <td>@item.productPrice.ToString("C")</td>
+                    <td>@item.itemQuantity</td>
+                    <td>@(item.productPrice * item.itemQuantity).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+@model FoodApplication.Models.Order
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white; /* White background */
+            color: #1B263B; /* Navy blue text */
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
-    </tbody>
-</table>
+
+        h2 {
+            color: #1B263B;
+            text-align: left;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .table {
+            background-color: white; /* White background for table */
+            color: #1B263B; /* Navy blue text */
+            border-radius: 8px;
+            overflow: hidden;
+            border-color: #1B263B;
+        }
+
+            .table th, .table td {
+                text-align: center;
+                padding: 15px;
+            }
+
+            .table th {
+                background-color: #1B263B; /* Darker navy blue for headers */
+                color: #FFFFFF;
+            }
+
+            .table tbody tr:hover {
+                background-color: #E5E9F0; /* Light grey for hover effect */
+            }
+
+        .btn, button {
+            background-color: #1B263B;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn:hover, button:hover {
+                background-color: #324A5E;
+            }
+
+            .btn:focus, button:focus {
+                outline: none;
+            }
+
+        #orderButton {
+            display: block;
+            margin: 20px auto;
+            background-color: #1B263B;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            #orderButton:hover {
+                background-color: #36557C;
+            }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Details</h2>
+
+        <p>Order ID: @Model.Id</p>
+        <p>Order Date: @Model.orderDate</p>
+        <p>Total Price: @Model.totalPrice.ToString("C")</p>
+        <p>Status: @Model.status</p>
+
+        <h3>Order Items</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.orderItems)
+                {
+                    <tr>
+                        <td>@item.productID</td>
+                        <td>@item.productPrice.ToString("C")</td>
+                        <td>@item.itemQuantity</td>
+                        <td>@(item.productPrice * item.itemQuantity).ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function orderNow() {
+            $.ajax({
+                url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                type: 'POST',
+                success: function (data) {
+                    if (data.success) {
+                        var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            success: function (response) {
+                                $('body').html(response);
+                            },
+                            error: function () {
+                                alert('Failed to load the order details.');
+                            }
+                        });
+                    } else {
+                        alert('Failed to create order: ' + data.message);
+                    }
+                },
+                error: function () {
+                    alert('There was an error creating the order.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
+

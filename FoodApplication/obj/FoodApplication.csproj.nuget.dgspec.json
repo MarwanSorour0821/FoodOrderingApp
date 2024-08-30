@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/marwansorour/Projects/FoodApplication/FoodApplication/FoodApplication.csproj": {}
+    "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/FoodApplication.csproj": {}
   },
   "projects": {
-    "/Users/marwansorour/Projects/FoodApplication/FoodApplication/FoodApplication.csproj": {
+    "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/FoodApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/FoodApplication.csproj",
+        "projectUniqueName": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/FoodApplication.csproj",
         "projectName": "FoodApplication",
-        "projectPath": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/FoodApplication.csproj",
+        "projectPath": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/FoodApplication.csproj",
         "packagesPath": "/Users/marwansorour/.nuget/packages/",
-        "outputPath": "/Users/marwansorour/Projects/FoodApplication/FoodApplication/obj/",
+        "outputPath": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/marwansorour/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.0, )"

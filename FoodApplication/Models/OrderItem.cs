@@ -8,6 +8,7 @@ namespace FoodApplication.Models
         public int id { get; set; }
 
         public int productID { get; set; }
+        public string productName { get; set; }
         public Product product { get; set; }
 
         public int itemQuantity { get; set; }

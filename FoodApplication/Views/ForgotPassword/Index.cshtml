@@ -1,15 +1,92 @@
-﻿@model FoodApplication.Models.forgotPasswordViewModel
+﻿@*@model FoodApplication.Models.forgotPasswordViewModel
 
-<h2>Forgot Password</h2>
+    <h2>Forgot Password</h2>
 
-<form asp-action="ForgotPassword" method="post">
-    <div class="form-group">
-        <label asp-for="EmployeeID"></label>
-        <input asp-for="EmployeeID" class="form-control" />
+    <form asp-action="ForgotPassword" method="post">
+        <div class="form-group">
+            <label asp-for="EmployeeID"></label>
+            <input asp-for="EmployeeID" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Send OTP</button>
+    </form>*@
+@model FoodApplication.Models.forgotPasswordViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white; /* White background for the page */
+            color: #1B263B; /* Navy blue text color */
+            font-family: Georgia, 'Times New Roman', Times, serif; /* Font family */
+        }
+
+        h2 {
+            color: #1B263B; /* Navy blue for heading */
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            color: #1B263B; /* Navy blue for labels */
+        }
+
+        .form-control {
+            border-radius: 4px; /* Rounded corners for input fields */
+            border: 1px solid #1B263B; /* Navy blue border */
+            padding: 10px; /* Padding inside input fields */
+            margin-bottom: 15px; /* Space between input fields */
+        }
+
+        .btn-primary {
+            background-color: #1B263B; /* Navy blue background for the button */
+            border-color: #1B263B; /* Navy blue border */
+            color: #FFFFFF; /* White text color */
+            padding: 10px 20px; /* Padding inside button */
+            border-radius: 4px; /* Rounded corners for button */
+            font-weight: bold; /* Bold text for button */
+        }
+
+            .btn-primary:hover {
+                background-color: #324A5E; /* Darker navy blue on hover */
+                border-color: #324A5E; /* Darker navy blue border on hover */
+            }
+
+        .form-container {
+            max-width: 500px; /* Max width of the form container */
+            margin: 0 auto; /* Center align the form */
+            padding: 20px; /* Padding inside the form container */
+            border-radius: 8px; /* Rounded corners for the form container */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Shadow effect for the form container */
+            background-color: #F8F9FA; /* Light grey background for form container */
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-container">
+        <h2>Forgot Password</h2>
+
+        <form asp-action="ForgotPassword" method="post">
+            <div class="form-group">
+                <label asp-for="EmployeeID"></label>
+                <input asp-for="EmployeeID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Send OTP</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Send OTP</button>
-</form>
+</body>
+</html>
+

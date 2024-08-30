@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+#log{
+    margin:auto;
+    text-align: center;
+    max-width: 500px
+}

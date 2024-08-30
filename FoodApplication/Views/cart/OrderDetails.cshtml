@@ -9,21 +9,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #1B263B; /* Navy blue background */
-            color: #FFFFFF; /* White text */
-            font-family: 'Arial', sans-serif;
+            background-color: white; /* Navy blue background */
+            color: #001f3f; /* White text */
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         h2, h3 {
-            color: #FFFFFF;
-            text-align: center;
+            color: #001f3f;
+            text-align: left;
             margin-top: 20px;
             font-weight: bold;
         }
 
         p {
             font-size: 18px;
-            text-align: center;
+            text-align: left;
+            
         }
 
         .table {
@@ -92,7 +93,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Product ID</th>
+                    <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
@@ -102,7 +103,8 @@
                 @foreach (var item in Model.orderItems)
                 {
                     <tr>
-                        <td>@item.productID</td>
+                        
+                        <td>@item.productName</td>
                         <td>@item.productPrice</td>
                         <td>@item.itemQuantity</td>
                         <td>@(item.productPrice * item.itemQuantity) EGP</td>

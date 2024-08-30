@@ -33,6 +33,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult searchOrder()
+    {
+        return RedirectToAction("SearchOrder", "searchOrder");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

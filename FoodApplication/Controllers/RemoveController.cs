@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application;
 using FoodApplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static System.Collections.Specialized.BitVector32;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -39,13 +40,34 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var product = _context.products.Find(id);
-            if (product != null)
+            //var product = _context.products.Find(id);
+            //if (product != null)
+            //{
+            //    _context.products.Remove(product);
+            //    _context.SaveChanges();
+            //}
+            //return RedirectToAction(nameof(Index));
+
+            try
             {
-                _context.products.Remove(product);
-                _context.SaveChanges();
+                var product = _context.products.Find(id);
+                if (product != null)
+                {
+                    _context.products.Remove(product);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return RedirectToAction(nameof(Index));
+            catch (DbUpdateException ex)
+            {
+                // Log the error or inspect ex.InnerException for details
+                var innerException = ex.InnerException?.Message;
+                // You can also rethrow or handle the exception differently
+                return Json(new { success = false, message = $"Could not add product to cart: {innerException}" });
+            }
+
+            return Json(new { success = true, message = "Added" });
+
         }
 
         [HttpPost]

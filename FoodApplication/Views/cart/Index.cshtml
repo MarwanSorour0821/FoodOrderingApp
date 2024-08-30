@@ -11,7 +11,7 @@
         body {
             background-color: white; /* Navy blue background */
             color: #FFFFFF; /* White text */
-            font-family: 'Arial', sans-serif;
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         h2 {
@@ -81,7 +81,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Your Cart</h2>
+        <h2 style="color: #1B263B">Your Cart </h2>
 
         @if (Model.Count == 0)
         {
@@ -92,26 +92,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Product ID</th>
-                        <th>Price</th>
+                        
+                        <th>Name</th>
                         <th>Quantity</th>
+                        <th>Price</th>
                         <th>Total</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.productID</td>
-                            <td>@item.productPrice.ToString("C")</td>
+                            
+                            <td>@item.productName</td>
                             <td>
                                 <!-- Quantity controls -->
                                 <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
                                 <span id="quantity_@item.productID">@item.itemQuantity</span>
                                 <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
                             </td>
-                            <td id="total_@item.productID">@((item.productPrice * item.itemQuantity).ToString("C"))</td>
+                            <td id="total_@item.productID">@(item.productPrice * item.itemQuantity) EGP</td>
                             <td>
                                 <!-- Remove button -->
                                 <button type="button" onclick='removeItem(@item.productID)'>Remove</button>

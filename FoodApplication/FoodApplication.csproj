@@ -17,6 +17,7 @@
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Login\" />
@@ -27,6 +28,8 @@
     <None Remove="Helper\" />
     <None Remove="Views\order\" />
     <None Remove="Views\Remove\" />
+    <None Remove="Views\searchOrder\" />
+    <None Remove="Views\dessert\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
@@ -38,6 +41,8 @@
     <Folder Include="Helper\" />
     <Folder Include="Views\order\" />
     <Folder Include="Views\Remove\" />
+    <Folder Include="Views\searchOrder\" />
+    <Folder Include="Views\dessert\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />
