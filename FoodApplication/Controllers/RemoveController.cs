@@ -24,6 +24,11 @@ namespace FoodApplication.Controllers
         // GET: RemoveProduct
         public IActionResult Index(string searchString)
         {
+            //if (HttpContext.Session.GetString("EMAIL") == null)
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
+
             var products = from p in _context.products
                            select p;
 
@@ -47,6 +52,11 @@ namespace FoodApplication.Controllers
             //    _context.SaveChanges();
             //}
             //return RedirectToAction(nameof(Index));
+
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             try
             {
@@ -74,6 +84,11 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, creatViewModel model)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             id = (int) HttpContext.Session.GetInt32("productID");
             var product = _context.products.Find(id);
             if (product != null)
@@ -96,6 +111,11 @@ namespace FoodApplication.Controllers
 
         public IActionResult adjust(int id)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             HttpContext.Session.SetInt32("productID", id);
 
             return View();

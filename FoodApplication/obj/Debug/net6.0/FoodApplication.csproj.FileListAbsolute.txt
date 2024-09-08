@@ -136,3 +136,15 @@
 /Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/Debug/net6.0/FoodApplication.pdb
 /Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/Debug/net6.0/FoodApplication.genruntimeconfig.cache
 /Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/Debug/net6.0/ref/FoodApplication.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/System.Net.WebSockets.WebSocketProtocol.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.AspNetCore.SignalR.Common.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.Extensions.Features.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.Extensions.Options.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/Microsoft.Extensions.Primitives.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/System.IO.Pipelines.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/System.Text.Encodings.Web.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/System.Text.Json.dll
+/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/bin/Debug/net6.0/runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll

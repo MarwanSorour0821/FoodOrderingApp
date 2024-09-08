@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/FoodApplication.bundle.scp.css"
     },
     {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/blueOutline.jpg",
+      "PackagePath": "staticwebassets/assets/blueOutline.jpg"
+    },
+    {
       "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/dessertHoriz.png",
       "PackagePath": "staticwebassets/assets/dessertHoriz.png"
     },
@@ -39,6 +43,10 @@
     {
       "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg",
       "PackagePath": "staticwebassets/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg"
+    },
+    {
+      "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/8c072e25-84a3-4390-b917-8b706f731823.jpg",
+      "PackagePath": "staticwebassets/images/8c072e25-84a3-4390-b917-8b706f731823.jpg"
     },
     {
       "Id": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/ae1a43a1-f75c-441d-b061-827779ca92ce.jpg",

@@ -16,6 +16,7 @@ using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 using System.Drawing.Imaging;
 using static QRCoder.PayloadGenerator;
+using Microsoft.AspNetCore.SignalR;
 
 namespace FoodApplication.Controllers
 {
@@ -25,16 +26,18 @@ namespace FoodApplication.Controllers
         private readonly ApplicationDbContext _context;
         private const string CartSessionKey = "CartItems";
         private const string orderSession = "Orders";
-        
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public CartController(ApplicationDbContext context)
+
+        public CartController(ApplicationDbContext context, IHubContext<NotificationHub> hubContext)
         {
+            _hubContext = hubContext;
             _context = context;
         }
 
         [HttpPost]
         [Route("AddProductToCartAsync")]
-        public async Task<IActionResult> AddProductToCartAsync(int? id, int quantity)
+        public async Task<IActionResult> AddProductToCartAsync(int? id)
         {
             var product = await _context.products.FindAsync(id);
             var user = HttpContext.Session.GetInt32("ID");
@@ -93,6 +96,7 @@ namespace FoodApplication.Controllers
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession) ?? new Order
             {
                 //Id = newOrder.Id,
+
                 orderDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 status = "Pending",
                 orderItems = new List<OrderItem>()
@@ -109,7 +113,7 @@ namespace FoodApplication.Controllers
             {
                 existingProduct.itemQuantity++;
             }
-            else if (product.productStock < quantity)
+            else if (product.productStock < 1)
             {
                 return Json(new { success = false, message = "Quantity more than stock" });
             }
@@ -120,7 +124,7 @@ namespace FoodApplication.Controllers
                     //orderID = lastOrder.Id,
                     productID = product.id,
                     productName = product.productName,
-                    itemQuantity = quantity,
+                    itemQuantity = 1,
                     productPrice = product.productPrice
                 });
             }
@@ -136,8 +140,25 @@ namespace FoodApplication.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
             return View(cart);
+        }
+
+
+        [HttpGet]
+        [Route("GetCartCount")]
+        public int GetCartCount()
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<OrderItem>>(CartSessionKey) ?? new List<OrderItem>();
+            int itemCount = cart.Sum(item => item.itemQuantity); // If each OrderItem has a Quantity property
+
+            // Return the total count of items in the cart
+            return itemCount;
+            
         }
 
         [HttpGet]
@@ -276,6 +297,11 @@ namespace FoodApplication.Controllers
         public IActionResult OrderDetails()
         {
 
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var order = HttpContext.Session.GetObjectFromJson<Order>(orderSession);
             //_context.orders.Add(order);
             //_context.SaveChanges();
@@ -299,10 +325,12 @@ namespace FoodApplication.Controllers
             var userInfo = _context.users.FirstOrDefault(o => o.Id == user);
 
             Order newOrder = new Order();
-            newOrder.userID = userInfo.Id;
+            newOrder.userID = userInfo.EmployeeID;
             newOrder.orderDate = DateTime.Now.ToString("yyyy-MM-dd");
             newOrder.status = "Pending";
             newOrder.totalPrice = cart.Sum(item => item.itemQuantity * item.productPrice);
+            newOrder.orderNumber = GenerateOrderNumber();
+
 
             _context.orders.Add(newOrder);
             _context.SaveChanges();
@@ -344,21 +372,21 @@ namespace FoodApplication.Controllers
                 _context.SaveChanges();
             }
 
-            return Json(new { success = true });
+            _hubContext.Clients.All.SendAsync("ReceiveOrderUpdate", "A new order has been placed.");
+
+            //return Json(new { success = true });
+            return RedirectToAction("login1", "Login");
         }
 
         // Example of how to generate a QR code (using QRCoder library)
-        private string GenerateQrCode(Order order)
-        {
-            string qrCodeUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Order{order.Id}";
-            return qrCodeUrl;
-        }
+        
 
         // Example of how to send an email (using your email service)
         private bool SendOrderConfirmationEmail(Order order)
         {
-            string qrCodeUrl = GenerateQrCode(order);
-            string emailBody = $"<p>Thank you for your order! Here is your QR code:</p><img src='{qrCodeUrl}' />";
+            //string qrCodeUrl = GenerateQrCode(order);
+            //string emailBody = $"<p>Thank you for your order! The estimated time for your order is from 45-60 minutes. Here is your QR code:</p><img src='{qrCodeUrl}' />";
+            string emailBody = $"<p>Thank you for your order! The estimated time for your order is from 45-60 minutes. Your order number is {order.orderNumber}. You'll be confirming this number on delivery.";
             var fromAddress = new MailAddress("thetechonomicpost@gmail.com", "Butler & Co.");
             const string fromPassword = "jtde diti xxal cmwn";
             var toEmail = HttpContext.Session.GetString("EMAIL");
@@ -384,6 +412,34 @@ namespace FoodApplication.Controllers
                 return true;
 
         }
+
+        //GENERATE ORDER NUMBER
+        private int GenerateOrderNumber()
+        {
+            // Get the last order placed
+            var lastOrder = _context.orders
+                                          .OrderByDescending(o => o.Id)
+                                          .FirstOrDefault();
+
+            int newOrderNumber = 1; // Default to 1 if no orders exist or it's a new day
+
+            if (lastOrder != null)
+            {
+                // Parse the last order's date (ensure date format matches)
+                DateTime lastOrderDate = DateTime.Parse(lastOrder.orderDate);
+
+                // Check if the last order was placed on the current date
+                if (lastOrderDate.Date == DateTime.UtcNow.Date)
+                {
+                    // If it's the same day, increment the order number
+                    newOrderNumber = lastOrder.orderNumber + 1;
+                }
+                // If it's a new day, newOrderNumber will remain 1 (reset)
+            }
+
+            return newOrderNumber;
+        }
+
 
     }
 }

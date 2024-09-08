@@ -33,6 +33,11 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> create(creatViewModel model)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             if (ModelState.IsValid)
             {
                 string imageFileName = null;
@@ -43,6 +48,11 @@ namespace FoodApplication.Controllers
                 }
                 var lastProduct = _context.products.OrderByDescending(p => p.id).FirstOrDefault();
                 int lastProductId = lastProduct?.id ?? 0;
+
+                if(model.productPrice < 0 || model.productStock < 1)
+                {
+                    return Json(new { success = false, message ="Product Price or Product Stock less than 0" });
+                }
 
                 var product = new Product()
                     {
@@ -67,8 +77,6 @@ namespace FoodApplication.Controllers
 
 
         }
-
-
 
 
         private async Task<string> SaveCover(IFormFile cover)

@@ -18,8 +18,15 @@ namespace FoodApplication.Controllers
         }
 
         // GET: /<controller>/
+        [HttpGet]
+        [Route("Index")]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var model = new foodViewModel
             {
                 FoodItems = _context.products.Where(a => a.productCategory.Equals("Food")).Select(a => new Product {
@@ -38,7 +45,56 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(foodViewModel model)
         {
+
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var foodItems = _context.products.Where(a => a.productCategory.Equals("Food")).ToList();
+
+            //makes sure FoodItems is not null
+            model.FoodItems = foodItems ?? new List<Product>();
+            if (!foodItems.Any())
+            {
+                ModelState.AddModelError(string.Empty, "No food here");
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Route("Desserts")]
+        public IActionResult Desserts(foodViewModel model)
+        {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            var foodItems = _context.products.Where(a => a.productCategory.Equals("Dessert")).ToList();
+
+            //makes sure FoodItems is not null
+            model.FoodItems = foodItems ?? new List<Product>();
+            if (!foodItems.Any())
+            {
+                ModelState.AddModelError(string.Empty, "No food here");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("Drinks")]
+        public IActionResult Drinks(foodViewModel model)
+        {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            var foodItems = _context.products.Where(a => a.productCategory.Equals("Drink")).ToList();
 
             //makes sure FoodItems is not null
             model.FoodItems = foodItems ?? new List<Product>();

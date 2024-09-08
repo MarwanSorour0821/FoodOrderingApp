@@ -10,6 +10,7 @@ namespace FoodApplication.Models
         public int userID { get; set; }
         public User user { get; set; }
         public string status { get; set; }
+        public int orderNumber { get; set; }
 
         public ICollection<OrderItem> orderItems { get; set; }
 

@@ -1,4 +1,1132 @@
-﻿@model List<OrderItem>
+﻿@*@model List<OrderItem>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Cart</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: white; /* Navy blue background */
+                color: #FFFFFF; /* White text */
+                font-family: Georgia, 'Times New Roman', Times, serif;
+            }
+
+            h2 {
+                color: #FFFFFF;
+                text-align: center;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+
+            .table {
+                background-color: white; /* White background for table */
+                color: #1B263B; /* Navy blue text */
+                border-radius: 8px;
+                overflow: hidden;
+                border-color: #1B263B;
+            }
+
+                .table th, .table td {
+                    text-align: center;
+                    padding: 15px;
+                }
+
+                .table th {
+                    background-color: #1B263B; /* Darker navy blue for headers */
+                    color: #FFFFFF;
+                }
+
+                .table tbody tr:hover {
+                    background-color: #E5E9F0; /* Light grey for hover effect */
+                }
+
+            .btn, button {
+                background-color: #1B263B;
+                color: #FFFFFF;
+                border: none;
+                padding: 10px 20px;
+                margin: 5px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .btn:hover, button:hover {
+                    background-color: #324A5E;
+                }
+
+                .btn:focus, button:focus {
+                    outline: none;
+                }
+
+            #orderButton {
+                display: block;
+                margin: 20px auto;
+                background-color: #1B263B;
+                padding: 15px 40px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+                #orderButton:hover {
+                    background-color: #36557C;
+                }
+
+            p {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 style="color: #1B263B">Your Cart </h2>
+
+            @if (Model.Count == 0)
+            {
+                <p>Your cart is empty.</p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.productName</td>
+                                <td>
+                                     Quantity controls
+                                    <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                    <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                    <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                                </td>
+                                <td id="total_@item.productID">@(item.productPrice * item.itemQuantity) EGP</td>
+                                <td>
+                                     Remove button
+                                    <button type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+            }
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            function removeItem(productID) {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/removeItem",
+                    type: 'GET',
+                    data: { productID: productID },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Could not remove item: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error removing the item.');
+                    }
+                });
+            }
+
+            function updateQuantity(productID, change) {
+                var quantityElement = document.getElementById('quantity_' + productID);
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity > 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    $.ajax({
+                        url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
+                        type: 'GET',
+                        data: { productID: productID, newQuantity: newQuantity },
+                        success: function (data) {
+                            if (data.success) {
+                                var totalElement = document.getElementById('total_' + productID);
+                                totalElement.innerHTML = (data.newTotalPrice).toFixed(2) + ' EGP';
+                            } else {
+                                alert('Could not update quantity: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('There was an error updating the quantity.');
+                        }
+                    });
+                } else if (newQuantity == 0) {
+                    removeItem(productID);
+                }
+            }
+
+            function orderNow() {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function (response) {
+                                    $('body').html(response);
+                                },
+                                error: function () {
+                                    alert('Failed to load the order details.');
+                                }
+                            });
+                        } else {
+                            alert('Failed to create order: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error creating the order.');
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html>*@
+
+@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Cart</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                display: flex;
+                justify-content: space-between;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+            }
+
+            .main-content {
+                flex: 1;
+                padding: 20px;
+            }
+
+            .cart-container {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 500px;
+                height: 600px;
+                overflow-y: auto;
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-left: 2px solid #1B263B;
+                box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                color: #1B263B;
+                text-align: center;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #ffffff;
+                color: #1B263B;
+                padding: 10px;
+                border: 1px solid #1B263B;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .cart-item-details {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+            }
+
+            .cart-item-controls {
+                display: flex;
+                align-items: center;
+            }
+
+            .quantity-control {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+                .quantity-control button {
+                    background-color: #1B263B;
+                    color: #FFFFFF;
+                    border: none;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                }
+
+                    .quantity-control button:hover {
+                        background-color: #324A5E;
+                    }
+
+            .remove-btn {
+                background-color: #1B263B;
+                color: #FFFFFF;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+                .remove-btn:hover {
+                    background-color: #324A5E;
+                }
+
+            #orderButton {
+                display: block;
+                margin: 20px auto;
+                background-color: #1B263B;
+                padding: 15px 40px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                #orderButton:hover {
+                    background-color: #36557C;
+                }
+        </style>
+    </head>
+    <body>
+
+         Main content area (can be your food items display)
+        <div class="main-content">
+            <h1>Welcome to Our Food Shop!</h1>
+             Add your main page content here
+        </div>
+
+         Cart container
+        <div class="cart-container">
+            <h2>Your Cart</h2>
+
+            @if (Model.Count == 0)
+            {
+                <p>Your cart is empty.</p>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <span><strong>@item.productName</strong></span>
+                            <span>Price: @item.productPrice EGP</span>
+                            <span>Total: @(item.productPrice * item.itemQuantity) EGP</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="quantity-control">
+                                <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                        </div>
+                    </div>
+                }
+                <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+            }
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            function removeItem(productID) {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/removeItem",
+                    type: 'GET',
+                    data: { productID: productID },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Could not remove item: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error removing the item.');
+                    }
+                });
+            }
+
+            function updateQuantity(productID, change) {
+                var quantityElement = document.getElementById('quantity_' + productID);
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity > 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    $.ajax({
+                        url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
+                        type: 'GET',
+                        data: { productID: productID, newQuantity: newQuantity },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert('Could not update quantity: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('There was an error updating the quantity.');
+                        }
+                    });
+                } else if (newQuantity == 0) {
+                    removeItem(productID);
+                }
+            }
+
+            function orderNow() {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function (response) {
+                                    $('body').html(response);
+                                },
+                                error: function () {
+                                    alert('Failed to load the order details.');
+                                }
+                            });
+                        } else {
+                            alert('Failed to create order: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error creating the order.');
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html>*@
+
+@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Cart</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                display: flex;
+                justify-content: space-between;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                background-color: white;
+                margin: 0;
+            }
+
+
+            .cart-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Center vertically */
+                align-items: flex-end; /* Align the cart to the right */
+                height: 100vh;
+                position: fixed;
+                right: 0;
+                padding: 20px;
+            }
+
+            .cart-container {
+                width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                background-color: #f8f9fa;
+                padding: 20px;
+                border: 2px solid #1B263B;
+                border-radius: 8px;
+                box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                color: #1B263B;
+                text-align: center;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #ffffff;
+                color: #1B263B;
+                padding: 10px;
+                border: 1px solid #1B263B;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .cart-item-details {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+            }
+
+            .cart-item-controls {
+                display: flex;
+                align-items: center;
+            }
+
+            .quantity-control {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+                .quantity-control button {
+                    background-color: #1B263B;
+                    color: #FFFFFF;
+                    border: none;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                }
+
+                    .quantity-control button:hover {
+                        background-color: #324A5E;
+                    }
+
+            .remove-btn {
+                background-color: #1B263B;
+                color: #FFFFFF;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+                .remove-btn:hover {
+                    background-color: #324A5E;
+                }
+
+            #orderButton {
+                display: block;
+                margin: 20px auto;
+                background-color: #1B263B;
+                padding: 15px 40px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                #orderButton:hover {
+                    background-color: #36557C;
+                }
+        </style>
+    </head>
+    <body>
+
+         Main content area (can be your food items display)
+        <div class="main-content">
+            <h1>Welcome to Our Food Shop!</h1>
+             Add your main page content here
+        </div>
+
+         Cart container inside a wrapper for centering
+        <div class="cart-wrapper">
+            <div class="cart-container">
+                <h2>Your Cart</h2>
+
+                @if (Model.Count == 0)
+                {
+                    <p>Your cart is empty.</p>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="cart-item">
+                            <div class="cart-item-details">
+                                <span><strong>@item.productName</strong></span>
+                                <span>Price: @item.productPrice EGP</span>
+                                <span>Total: @(item.productPrice * item.itemQuantity) EGP</span>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-control">
+                                    <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                    <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                    <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                                </div>
+                                <button class="remove-btn" type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                            </div>
+                        </div>
+                    }
+                    <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+                }
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            function removeItem(productID) {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/removeItem",
+                    type: 'GET',
+                    data: { productID: productID },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Could not remove item: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error removing the item.');
+                    }
+                });
+            }
+
+            function updateQuantity(productID, change) {
+                var quantityElement = document.getElementById('quantity_' + productID);
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity > 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    $.ajax({
+                        url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
+                        type: 'GET',
+                        data: { productID: productID, newQuantity: newQuantity },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert('Could not update quantity: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('There was an error updating the quantity.');
+                        }
+                    });
+                } else if (newQuantity == 0) {
+                    removeItem(productID);
+                }
+            }
+
+            function orderNow() {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function (response) {
+                                    $('body').html(response);
+                                },
+                                error: function () {
+                                    alert('Failed to load the order details.');
+                                }
+                            });
+                        } else {
+                            alert('Failed to create order: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error creating the order.');
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html>*@
+
+@*@{
+        ViewData["Title"] = "Login";
+        Layout = "~/Views/Shared/loggedIN.cshtml";
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Cart</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                display: flex;
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                background-color: white;
+                margin: 0;
+                height: 100vh; /* Full viewport height */
+                overflow: hidden; /* Prevent body scrolling */
+            }
+
+            .cart-container {
+                width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                background-color: #f8f9fa;
+                padding: 20px;
+                border: 2px solid #1B263B;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                color: #1B263B;
+                text-align: center;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #ffffff;
+                color: #1B263B;
+                padding: 10px;
+                border: 1px solid #1B263B;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .cart-item-details {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+            }
+
+            .cart-item-controls {
+                display: flex;
+                align-items: center;
+            }
+
+            .quantity-control {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+                .quantity-control button {
+                    background-color: #1B263B;
+                    color: #FFFFFF;
+                    border: none;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                }
+
+                    .quantity-control button:hover {
+                        background-color: #324A5E;
+                    }
+
+            .remove-btn {
+                background-color: #1B263B;
+                color: #FFFFFF;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+                .remove-btn:hover {
+                    background-color: #324A5E;
+                }
+
+            #orderButton {
+                display: block;
+                margin: 20px auto;
+                background-color: #1B263B;
+                padding: 15px 40px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                #orderButton:hover {
+                    background-color: #36557C;
+                }
+        </style>
+    </head>
+    <body>
+
+         Cart container centered in the screen
+        <div class="cart-container">
+            <h2>Your Cart</h2>
+
+            @if (Model.Count == 0)
+            {
+                <p>Your cart is empty.</p>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <span><strong>@item.productName</strong></span>
+                            <span>Price: @item.productPrice EGP</span>
+                            <span>Total: @(item.productPrice * item.itemQuantity) EGP</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="quantity-control">
+                                <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                        </div>
+                    </div>
+                }
+                <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+            }
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            function removeItem(productID) {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/removeItem",
+                    type: 'GET',
+                    data: { productID: productID },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Could not remove item: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error removing the item.');
+                    }
+                });
+            }
+
+            function updateQuantity(productID, change) {
+                var quantityElement = document.getElementById('quantity_' + productID);
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity > 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    $.ajax({
+                        url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
+                        type: 'GET',
+                        data: { productID: productID, newQuantity: newQuantity },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert('Could not update quantity: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('There was an error updating the quantity.');
+                        }
+                    });
+                } else if (newQuantity == 0) {
+                    removeItem(productID);
+                }
+            }
+
+            function orderNow() {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function (response) {
+                                    $('body').html(response);
+                                },
+                                error: function () {
+                                    alert('Failed to load the order details.');
+                                }
+                            });
+                        } else {
+                            alert('Failed to create order: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error creating the order.');
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html>*@
+@*@{
+        ViewData["Title"] = "Your Cart";
+        Layout = "~/Views/Shared/loggedIN.cshtml";
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Cart</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                display: flex;
+                height: 100vh;
+                margin: 0;
+                font-family: 'Roboto', Arial, sans-serif;
+                background-color: #f5f5f5;
+            }
+
+            .left-side {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                padding: 40px;
+                background-color: #ffffff;
+            }
+
+            .right-side {
+                flex: 1;
+                background-color: #1B263B; /* Dark blue color */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+            }
+
+            .cart-container {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                font-size: 22px;
+                color: #202124;
+                margin-bottom: 10px;
+                font-weight: 500;
+                text-align: center;
+            }
+
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #f8f9fa;
+                padding: 10px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .cart-item-details {
+                flex: 2;
+                text-align: left;
+            }
+
+            .cart-item-controls {
+                display: flex;
+                align-items: center;
+            }
+
+            .quantity-control button,
+            .remove-btn,
+            #orderButton {
+                background-color: #1a73e8;
+                color: #ffffff;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+
+                .quantity-control button:hover,
+                .remove-btn:hover,
+                #orderButton:hover {
+                    background-color: #185abc;
+                }
+
+            .remove-btn {
+                margin-left: 10px;
+            }
+
+            #orderButton {
+                display: block;
+                margin: 20px auto;
+                padding: 10px 30px;
+                font-size: 16px;
+                font-weight: 500;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="left-side">
+            <div class="cart-container">
+                <h2>Your Cart</h2>
+
+                @if (Model.Count == 0)
+                {
+                    <p class="empty-cart-message">Your cart is empty.</p>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="cart-item">
+                            <div class="cart-item-details">
+                                <span><strong>@item.productName</strong></span>
+                                <span>Price: @item.productPrice EGP</span>
+                                <span>Total: @(item.productPrice * item.itemQuantity) EGP</span>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-control">
+                                    <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                                    <span id="quantity_@item.productID">@item.itemQuantity</span>
+                                    <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                                </div>
+                                <button class="remove-btn" type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                            </div>
+                        </div>
+                    }
+                    <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+                }
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="brand-logo">
+                <h1>ELBOD2i</h1>  Replace with your brand name
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            // JavaScript functions remain unchanged
+            function removeItem(productID) {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/removeItem",
+                    type: 'GET',
+                    data: { productID: productID },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Could not remove item: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error removing the item.');
+                    }
+                });
+            }
+
+            function updateQuantity(productID, change) {
+                var quantityElement = document.getElementById('quantity_' + productID);
+                var currentQuantity = parseInt(quantityElement.innerHTML);
+                var newQuantity = currentQuantity + change;
+
+                if (newQuantity > 0) {
+                    quantityElement.innerHTML = newQuantity;
+                    $.ajax({
+                        url: '@Url.Content("~/")' + "Cart/UpdateQuantity",
+                        type: 'GET',
+                        data: { productID: productID, newQuantity: newQuantity },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert('Could not update quantity: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('There was an error updating the quantity.');
+                        }
+                    });
+                } else if (newQuantity == 0) {
+                    removeItem(productID);
+                }
+            }
+
+            function orderNow() {
+                $.ajax({
+                    url: '@Url.Content("~/")' + "Cart/CreateOrder",
+                    type: 'POST',
+                    success: function (data) {
+                        if (data.success) {
+                            var url = '@Url.Content("~/")' + "Cart/OrderDetails";
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function (response) {
+                                    $('body').html(response);
+                                },
+                                error: function () {
+                                    alert('Failed to load the order details.');
+                                }
+                            });
+                        } else {
+                            alert('Failed to create order: ' + data.message);
+                        }
+                    },
+                    error: function () {
+                        alert('There was an error creating the order.');
+                    }
+                });
+            }
+        </script>
+    </body>
+    </html>*@
+
+@{
+    ViewData["Title"] = "Your Cart";
+    Layout = "~/Views/Shared/loggedIN.cshtml";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,118 +1137,156 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: white; /* Navy blue background */
-            color: #FFFFFF; /* White text */
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f7f9;
         }
 
-        h2 {
-            color: #FFFFFF;
-            text-align: center;
-            margin-top: 20px;
-            font-weight: bold;
+        .left-panel {
+            flex: 0.3;
+            background-color: #1E2A38;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .table {
-            background-color: white; /* White background for table */
-            color: #1B263B; /* Navy blue text */
+            .left-panel h2 {
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+        .summary {
+            margin-top: auto;
+            font-size: 18px;
+        }
+
+            .summary p {
+                margin: 0;
+                padding: 5px 0;
+            }
+
+        .right-panel {
+            flex: 0.7;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #ffffff;
             border-radius: 8px;
-            overflow: hidden;
-            border-color: #1B263B;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
 
-            .table th, .table td {
-                text-align: center;
-                padding: 15px;
+            .cart-item:hover {
+                transform: translateY(-5px);
             }
 
-            .table th {
-                background-color: #1B263B; /* Darker navy blue for headers */
-                color: #FFFFFF;
-            }
+        .cart-item-details {
+            flex: 3;
+        }
 
-            .table tbody tr:hover {
-                background-color: #E5E9F0; /* Light grey for hover effect */
-            }
+        .cart-item-controls {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        .btn, button {
-            background-color: #1B263B;
-            color: #FFFFFF;
+        .quantity-control button {
+            background-color: #e0e0e0;
             border: none;
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+            .quantity-control button:hover {
+                background-color: #cccccc;
+            }
+
+        .remove-btn {
+            background-color: #ff5c5c;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-            .btn:hover, button:hover {
-                background-color: #324A5E;
-            }
-
-            .btn:focus, button:focus {
-                outline: none;
+            .remove-btn:hover {
+                background-color: #e04a4a;
             }
 
         #orderButton {
-            display: block;
-            margin: 20px auto;
-            background-color: #1B263B;
-            padding: 15px 40px;
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
             font-size: 18px;
-            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
             #orderButton:hover {
-                background-color: #36557C;
+                background-color: #155bb5;
             }
-
-        p {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 style="color: #1B263B">Your Cart </h2>
-
+    <div class="left-panel">
+        <div>
+            <h2>Your Cart</h2>
+            <p>Review your items before checkout.</p>
+        </div>
+        <div class="summary">
+            <p><strong>Total Items:</strong> @Model.Count</p>
+            <p><strong>Total Price:</strong> @((Model as IEnumerable<dynamic>).Sum((Func<dynamic, decimal>)(item => (decimal)item.productPrice * (decimal)item.itemQuantity)))</p>
+            <button id="orderButton" type="button" onclick="orderNow()">Proceed to Checkout</button>
+        </div>
+    </div>
+    sazsawx
+    <div class="right-panel">
         @if (Model.Count == 0)
         {
-            <p>Your cart is empty.</p>
+            <p class="empty-cart-message">Your cart is empty.</p>
         }
         else
         {
-            <table class="table">
-                <thead>
-                    <tr>
-                        
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            
-                            <td>@item.productName</td>
-                            <td>
-                                <!-- Quantity controls -->
-                                <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
-                                <span id="quantity_@item.productID">@item.itemQuantity</span>
-                                <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
-                            </td>
-                            <td id="total_@item.productID">@(item.productPrice * item.itemQuantity) EGP</td>
-                            <td>
-                                <!-- Remove button -->
-                                <button type="button" onclick='removeItem(@item.productID)'>Remove</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <button id="orderButton" type="button" onclick="orderNow()">Order Now</button>
+            @foreach (var item in Model)
+            {
+                <div class="cart-item">
+                    <div class="cart-item-details">
+                        <span><strong>@item.productName</strong></span>
+                        <p>Price: @item.productPrice EGP</p>
+                        <p>Total: @(item.productPrice * item.itemQuantity) EGP</p>
+                    </div>
+                    <div class="cart-item-controls">
+                        <div class="quantity-control">
+                            <button type="button" onclick="updateQuantity(@item.productID, -1)">−</button>
+                            <span id="quantity_@item.productID">@item.itemQuantity</span>
+                            <button type="button" onclick="updateQuantity(@item.productID, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" type="button" onclick='removeItem(@item.productID)'>Remove</button>
+                    </div>
+                </div>
+            }
         }
     </div>
 
@@ -157,8 +1323,7 @@
                     data: { productID: productID, newQuantity: newQuantity },
                     success: function (data) {
                         if (data.success) {
-                            var totalElement = document.getElementById('total_' + productID);
-                            totalElement.innerHTML = (data.newTotalPrice).toFixed(2) + ' EGP';
+                            location.reload();
                         } else {
                             alert('Could not update quantity: ' + data.message);
                         }

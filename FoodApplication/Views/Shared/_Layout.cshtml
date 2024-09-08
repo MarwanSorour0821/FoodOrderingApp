@@ -10,6 +10,20 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <style>
+        .cart-count {
+            position: absolute;
+            top: 5px;
+            right: 0px;
+            background-color: #fdc921;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -25,9 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="login1">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        
 
                         @*If the user is an admin*@
 
@@ -38,8 +50,8 @@
                         @if (userRole == 1)
                         {
                             @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin1">Admin</a>
-                            </li>*@
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin1">Admin</a>
+                </li>*@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Remove" asp-action="Index">Edit/Remove Item</a>
                             </li>
@@ -53,9 +65,31 @@
                             </li>
 
                         }
-                        <span class="navbar-text ms-auto">
+                        @*<span class="navbar-text ms-auto">
                             Logged in as @Context.Session.GetString("EMAIL")
-                        </span>
+                        </span>*@
+                    </ul>
+                    <ul class="navbar-nav">
+                        <!-- Dropdown for logged-in user -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Logged in as @Context.Session.GetString("EMAIL")
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item1">
+                            <a href="@Url.Action("Index", "Cart")" class="d-flex align-items-center">
+                                <i class="fas fa-shopping-cart fa-2x"></i>
+                                <span class="cart-count" id="cart-count">0</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -76,6 +110,25 @@
     </footer>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+@*<script>
+    function updateCartCount() {
+        $.ajax({
+            url: '@Url.Action("GetCartCount", "Cart")',
+            type: 'GET',
+            success: function (response) {
+                if (response.count !== undefined) {
+                    document.getElementById("cart-count").textContent = response.count;
+                }
+            }
+        });
+    }
+</script>*@
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        updateCartCount();
+    </script>
 </body>
 </html>
 

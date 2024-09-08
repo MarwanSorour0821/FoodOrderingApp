@@ -23,6 +23,11 @@ namespace FoodApplication.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var model = new drinkViewModel
             {
                 drinkItems = _context.products.Where(a => a.productCategory.Equals("Drink")).Select(a => new Product
@@ -44,6 +49,11 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(drinkViewModel model)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var DrinkItems = _context.products.Where(a => a.productCategory.Equals("Drink")).ToList();
 
             //makes sure FoodItems is not null

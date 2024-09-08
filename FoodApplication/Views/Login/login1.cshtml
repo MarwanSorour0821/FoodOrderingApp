@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "login1";
+﻿@model FoodApplication.Models.foodViewModel
+
+@{
+    ViewData["Title"] = "Display";
 }
 
 <!DOCTYPE html>
@@ -7,118 +9,320 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
     <style>
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            background-color: #1B263B;
+            /*            height: 100vh;*/
+            font-family: Arial, sans-serif;
+            background-color: white;
         }
 
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            filter: blur(0);
-            transition: filter 0.5s ease;
-            z-index: -1; /* Ensure background is behind everything */
+        .nav1 {
+            display: flex;
+            justify-content: space-around; /* Distribute items evenly */
+            background-color: #FFFFFF; /* White background for the nav */
+            padding: 20px 0; /* Padding around the nav items */
+            margin: 0;
+            list-style-type: none; /* Remove default list styles */
+            border-bottom: 2px solid #1B263B; /* Border bottom for separation */
+            width: 100%; /* Full width */
+            box-sizing: border-box;
         }
 
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
+        .nav-item1 {
+            margin: 0 20px; /* Spacing between nav items */
+            position: relative; /* For hover effect */
         }
 
-        .button {
-            position: relative;
-            display: block;
-            width: 850px;
-            height: 200px;
-            margin: 20px auto;
-            border: 2px solid white; /* White border before hovering */
-            border-radius: 15px;
-            background-color: #1B263B; /* Navy blue background */
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            line-height: 200px; /* Center text vertically */
-            cursor: pointer;
-            overflow: hidden; /* Ensures that the white background animation stays within the button */
-            transition: color 0.3s, box-shadow 0.3s, background-color 0.3s;
-        }
-
-            .button::before {
-                content: '';
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: white;
-                z-index: -1;
-                transition: top 0.5s;
-            }
-
-            .button:hover::before {
-                top: 0;
-            }
-
-            .button:hover {
+            .nav-item1 a {
+                display: flex;
+                align-items: center;
+                text-decoration: none; /* Remove underline */
                 color: #1B263B; /* Navy blue text */
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Shadow under the button */
-                background-color: white;
-                border-color: #1B263B; /* Change border color on hover */
+                padding: 10px 0; /* Padding around the links */
+                transition: all 0.3s ease; /* Smooth transition for hover effects */
             }
 
-        .text-center {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            font-size: 20px;
+                .nav-item1 a:hover {
+                    background-color: #F2F2F2; /* Light grey background on hover */
+                }
+
+                .nav-item1 a::before {
+                    content: '';
+                    position: absolute;
+                    height: 3px; /* Height of the line */
+                    width: 0; /* Start with no width */
+                    bottom: 0;
+                    left: 0;
+                    background-color: #1B263B; /* Navy blue color for the line */
+                    transition: width 0.3s ease; /* Smooth transition for the line */
+                }
+
+                .nav-item1 a:hover::before {
+                    width: 100%; /* Expand the line width on hover */
+                }
+
+            .nav-item1 i {
+                margin-right: 10px; /* Space between icon and text */
+            }
+
+            .nav-item1 .ps-3 {
+                padding-left: 10px;
+            }
+
+            .nav-item1 small {
+                display: block;
+                font-size: 12px;
+                color: #1B263B; /* Navy blue text */
+            }
+
+            .nav-item1 h6 {
+                margin: 0;
+                font-size: 18px;
+                color: #1B263B; /* Navy blue text */
+            }
+
+        .container1 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 items per row */
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%; /* Set a max width to center the grid */
+            margin: 0 auto; /* Center the grid */
+        }
+
+        .card {
+            background-color: #004E89;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             text-align: center;
             position: relative;
-            color: white;
-            z-index: 1; /* Ensure text is above the background */
+            width: 100%;
+            height: 400px;
+            text-align: left;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Slightly moved down */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
         }
+
+            .card.fade-in {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Move back to the original position */
+            }
+
+            .card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-bottom-left-radius: 15px;
+            }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #fdc921;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px; /* Keep the button at the bottom */
+            right: 20px; /* Keep the button to the right */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .add-to-cart-btn:hover {
+                background-color: #fff2b2;
+            }
     </style>
 </head>
 <body>
-    <div class="background-image"></div> <!-- Background container -->
 
-    <div class="text-center">
-        <h1 class="display-4">Menu</h1>
-    </div>
+    <ul class="nav1">
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "food")">
+                <i class="fas fa-hamburger fa-2x"></i>
+                <div class="ps-3">
+                    <small>Food</small>
+                    <h6 class="mt-n1 mb-0">Meals</h6>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "dessert")">
+                <i class="fas fa-ice-cream fa-2x"></i>
+                <div class="ps-3">
+                    <small>Sweet</small>
+                    <h6 class="mt-n1 mb-0">Dessert</h6>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "drink")">
+                <i class="fas fa-glass-martini-alt fa-2x"></i>
+                <div class="ps-3">
+                    <small>Beverages</small>
+                    <h6 class="mt-n1 mb-0">Drinks</h6>
+                </div>
+            </a>
+        </li>
+    </ul>
 
-    <div class="button-container">
-        <form method="get" action="/food">
-            <button type="submit" class="button">
-                Food
-            </button>
-        </form>
+    <!-- Displaying food items -->
+    <form asp-action="login1" asp-controller="login" method="get">
+        <div class="container1">
+            @if (Model.FoodItems != null && Model.FoodItems.Any())
+            {
+                @foreach (var meal in Model.FoodItems)
+                {
+                    <div class="card">
+                        <img src="~/images/@meal.productImage" alt="@meal.productName" />
+                        <div class="card-content">
+                            <h2 class="card-title">@meal.productName</h2>
+                            <p class="card-text">@meal.productInformation</p>
+                            <p class="price">@meal.productPrice EGP</p>
+                            <button type="button" class="add-to-cart-btn" onclick="addcart(@meal.id)">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No food items available.</p>
+            }
+        </div>
+    </form>
 
-        <form method="get" action="/Drink">
-            <button type="submit" class="button">
-                Drink
-            </button>
-        </form>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        function updateQuantity(mealId, change) {
+            var quantityInput = document.getElementById('quantity_' + mealId);
+            var currentQuantity = parseInt(quantityInput.value);
+            var newQuantity = currentQuantity + change;
+            if (newQuantity < 1) {
+                newQuantity = 1;
+            }
+            quantityInput.value = newQuantity;
+        }
 
-        <form method="get" action="/dessert">
-            <button type="submit" class="button">
-                Dessert
-            </button>
-        </form>
-    </div>
+        function addcart(mealId) {
+
+            var url = '@Url.Content("~/")' + "Cart/AddProductToCartAsync";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { id: mealId },
+                success: function (data) {
+                    if (data.success) {
+                        updateCartCount();
+                        alert('Product added to cart!');
+                        GetTotalPrice();  // Update total price
+                        Price(id);  // Update price for the specific item
+                        Total();  // Update overall totals
+                        
+                    } else {
+                        alert('Could not add product to cart: ' + data.message);
+                    }
+                },
+                error: function () {
+                    alert('There was an error adding the product to the cart.');
+                }
+            });
+        }
+
+        function GetTotalPrice() {
+            $.ajax({
+                url: '@Url.Action("GetTotalPrice", "Cart")',
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalPrice !== undefined) {
+                        document.getElementById("total-price").innerHTML = response.totalPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Price(id) {
+            $.ajax({
+                url: '@Url.Action("Price", "Cart")/' + id,
+                type: 'GET',
+                success: function(response) {
+                    if (response.totalItemPrice !== undefined) {
+                        document.getElementById("TotalItem_" + id).innerHTML = response.totalItemPrice.toFixed(2) + ' EGP';
+                    }
+                }
+            });
+        }
+
+        function Total() {
+            GetTotalPrice();
+        }
+
+
+        @*function updateCartCount() {
+            $.ajax({
+                url: '@Url.Action("GetCartCount", "Cart")',
+                type: 'GET',
+                success: function (response) {
+                    if (response.count !== undefined) {
+                        document.getElementById("cart-count").textContent = response.count;
+                    }
+                }
+            });
+        }*@
+
+        $(document).ready(function () {
+            // Select all cards
+            const cards = $('.card');
+
+            // Loop through each card and add the 'fade-in' class with a delay
+            cards.each(function (index) {
+                $(this).delay(index * 300).queue(function (next) {
+                    $(this).addClass('fade-in');
+                    next();
+                });
+            });
+        });
+
+    </script>
+
+    
 </body>
 </html>
-
-
-
-
-
 
 
 

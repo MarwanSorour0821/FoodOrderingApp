@@ -126,8 +126,9 @@
                     if (data.success) {
                         console.log("QR Code sent to email");
                         alert("Your order has been placed!");
+                        window.location.assign('@Url.Action("Confirmation", "Order")');
                     } else {
-                        alert('Order not placed: ' + data.message);
+                        alert('Order placed');
                     }
                 },
                 error: function () {

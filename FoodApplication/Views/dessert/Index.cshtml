@@ -1,4 +1,4 @@
-﻿@*@model FoodApplication.Models.drinkViewModel
+﻿@*@model FoodApplication.Models.dessertViewModel
 
     @{
         ViewData["Title"] = "Drink";
@@ -9,13 +9,13 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Drink</title>
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             body {
                 background-color: #1B263B; /* Navy blue background */
                 color: #FFFFFF; /* White text */
-                font-family: 'Arial', sans-serif;
+                font-family: Georgia, 'Times New Roman', Times, serif;
             }
 
             h1 {
@@ -29,52 +29,59 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                background-color: #1B263B; /* Light grey for meal boxes */
+                background-color: #1B263B; /* Same navy blue as the background */
                 border-radius: 8px;
                 margin-bottom: 15px;
                 padding: 15px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.1);
                 color: white;
+                border-bottom: 1px solid #ddd;
             }
-
-                .meal-box img {
-                    width: 100px;
-                    height: 100px;
-                    object-fit: cover;
-                    border-radius: 8px;
-                    margin-right: 20px;
-                }
 
             .meal-info {
                 flex-grow: 1;
-                color: #FFFFFF; /* Navy blue text for meal info */
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                margin-right: 20px;
+                text-align: left
             }
 
                 .meal-info h2 {
                     margin: 0;
-                    font-size: 22px;
+                    font-size: 28px;
                     font-weight: bold;
-                    color: #1B263B; /* Navy blue text */
+                    color: #FFFFFF; /* White text */
                 }
 
                 .meal-info p {
                     margin: 5px 0;
-                    font-size: 16px;
+                    font-size: 18px;
+                    color: #FFFFFF; /* White text */
                 }
 
             .price {
                 font-size: 18px;
                 font-weight: bold;
-                color: #FFFFFF; /* Green color for the price */
+                color: #FFFFFF; /* White text for the price */
+            }
+
+            .meal-image-quantity {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .meal-box img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 15px;
+                margin-bottom: 10px;
             }
 
             .quantity-controls {
                 display: flex;
                 align-items: center;
-                margin-top: 10px;
             }
 
             .quantity-btn {
@@ -101,47 +108,78 @@
                 color: black;
             }
 
-            .add-to-cart-btn {
-                background-color: #1B263B;
-                color: #FFFFFF;
+            /*        .add-to-cart-btn {
+                background-color: white;
+                color: #1B263B;
                 padding: 10px 20px;
                 border: none;
                 border-radius: 8px;
                 cursor: pointer;
                 margin-top: 10px;
-                align-self: flex-end; /* Align to the bottom right */
+                align-self: flex-start;
             }
 
                 .add-to-cart-btn:hover {
-                    background-color: #324A5E;
+                    background-color: #1B263B;
+                    border-color: white;
+                    color: white;
+                }*/
+
+            .add-to-cart-btn {
+                background-color: white; /* Initial white background */
+                color: #001f3f; /* Navy blue text */
+                padding: 10px 20px;
+                border: 2px solid #001f3f; /* Navy blue border */
+                border-radius: 10px;
+                cursor: pointer;
+                margin-top: 10px;
+                transition: background-color 0.3s, color 0.3s;
+                align-self: flex-start;
+            }
+
+                .add-to-cart-btn:hover {
+                    background-color: #001f3f; /* Navy blue background on hover */
+                    color: white; /* White text on hover */
+                    border-color: white; /* White border on hover */
                 }
 
             .view-cart-btn {
-                background-color: #28a745;
-                color: white;
-                padding: 15px 30px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 18px;
+                position: fixed; /* Fixed position on the screen */
+                top: 50%; /* Center vertically */
+                right: 0; /* Align to the right of the screen */
+                transform: translateY(-50%); /* Adjust position to be centered vertically */
+                background-color: white; /* White background initially */
+                color: #001f3f; /* Navy blue text */
+                padding: 20px; /* Padding around the icon */
+                border: 2px solid #001f3f; /* Navy blue border */
+                font-size: 24px; /* Font size for the icon */
                 text-align: center;
-                margin-top: 20px;
-                display: inline-block;
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+                z-index: 1000; /* Ensures it stays above other content */
+                border-radius: 10px 0 0 10px; /* Rounded corners on the left side */
+                display: flex; /* Flexbox for vertical alignment */
+                align-items: center;
+                justify-content: center;
+                height: 160px; /* Fixed height for button */
+                width: 60px; /* Fixed width for button */
             }
 
                 .view-cart-btn:hover {
-                    background-color: #218838;
+                    background-color: #001f3f; /* Navy blue background on hover */
+                    color: white; /* White text on hover */
+                    border-color: white; /* White border on hover */
                 }
         </style>
     </head>
 
     <body>
         <center>
-            <h1>Select a Drink</h1>
-            <form asp-action="Index" asp-controller="drink" method="post">
-                @if (Model.drinkItems != null && Model.drinkItems.Any())
+            <h1>Dessert Selection</h1>
+            <form asp-action="Index" asp-controller="dessert" method="post">
+                @if (Model.dessertItems != null && Model.dessertItems.Any())
                 {
-                    @foreach (var drink in Model.drinkItems)
+                    @foreach (var drink in Model.dessertItems)
                     {
                         <div class="meal-box">
                             <div class="meal-info">
@@ -167,7 +205,9 @@
                 }
             </form>
 
-            <a href="/cart" class="view-cart-btn">View Cart</a>
+            <a href="/cart" class="view-cart-btn">
+                <i class="fas fa-shopping-cart"></i>  Font Awesome cart icon
+            </a>
         </center>
 
         <script type="text/javascript">
@@ -239,215 +279,231 @@
 @model FoodApplication.Models.dessertViewModel
 
 @{
-    ViewData["Title"] = "Drink";
+    ViewData["Title"] = "Display";
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drink</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
     <style>
         body {
-            background-color: #1B263B; /* Navy blue background */
-            color: #FFFFFF; /* White text */
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            /*            height: 100vh;*/
+            font-family: Arial, sans-serif;
+            background-color: white;
         }
 
-        h1 {
-            color: #FFFFFF;
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .meal-box {
+        .nav1 {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1B263B; /* Same navy blue as the background */
-            border-radius: 8px;
-            margin-bottom: 15px;
-            padding: 15px;
-            color: white;
-            border-bottom: 1px solid #ddd;
+            justify-content: space-around; /* Distribute items evenly */
+            background-color: #FFFFFF; /* White background for the nav */
+            padding: 20px 0; /* Padding around the nav items */
+            margin: 0;
+            list-style-type: none; /* Remove default list styles */
+            border-bottom: 2px solid #1B263B; /* Border bottom for separation */
+            width: 100%; /* Full width */
+            box-sizing: border-box;
         }
 
-        .meal-info {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-right: 20px;
-            text-align: left
+        .nav-item1 {
+            margin: 0 20px; /* Spacing between nav items */
+            position: relative; /* For hover effect */
         }
 
-            .meal-info h2 {
+            .nav-item1 a {
+                display: flex;
+                align-items: center;
+                text-decoration: none; /* Remove underline */
+                color: #1B263B; /* Navy blue text */
+                padding: 10px 0; /* Padding around the links */
+                transition: all 0.3s ease; /* Smooth transition for hover effects */
+            }
+
+                .nav-item1 a:hover {
+                    background-color: #F2F2F2; /* Light grey background on hover */
+                }
+
+                .nav-item1 a::before {
+                    content: '';
+                    position: absolute;
+                    height: 3px; /* Height of the line */
+                    width: 0; /* Start with no width */
+                    bottom: 0;
+                    left: 0;
+                    background-color: #1B263B; /* Navy blue color for the line */
+                    transition: width 0.3s ease; /* Smooth transition for the line */
+                }
+
+                .nav-item1 a:hover::before {
+                    width: 100%; /* Expand the line width on hover */
+                }
+
+            .nav-item1 i {
+                margin-right: 10px; /* Space between icon and text */
+            }
+
+            .nav-item1 .ps-3 {
+                padding-left: 10px;
+            }
+
+            .nav-item1 small {
+                display: block;
+                font-size: 12px;
+                color: #1B263B; /* Navy blue text */
+            }
+
+            .nav-item1 h6 {
                 margin: 0;
-                font-size: 28px;
-                font-weight: bold;
-                color: #FFFFFF; /* White text */
+                font-size: 18px;
+                color: #1B263B; /* Navy blue text */
             }
 
-            .meal-info p {
-                margin: 5px 0;
-                font-size: 18px;
-                color: #FFFFFF; /* White text */
+        .container1 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 items per row */
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%; /* Set a max width to center the grid */
+            margin: 0 auto; /* Center the grid */
+        }
+
+        .card {
+            background-color: #1d3557;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 400px;
+            text-align: left;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Slightly moved down */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+        }
+
+            .card.fade-in {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Move back to the original position */
             }
+
+            .card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 15px;
+        }
 
         .price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            color: #FFFFFF; /* White text for the price */
+            color: white;
+            margin-bottom: 15px;
         }
-
-        .meal-image-quantity {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .meal-box img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 10px;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-btn {
-            width: 30px;
-            height: 30px;
-            background-color: #1B263B;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            line-height: 30px;
-            font-size: 18px;
-            margin: 0 5px;
-        }
-
-            .quantity-btn:hover {
-                background-color: #324A5E;
-            }
-
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            color: black;
-        }
-
-        /*        .add-to-cart-btn {
-            background-color: white;
-            color: #1B263B;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-            align-self: flex-start;
-        }
-
-            .add-to-cart-btn:hover {
-                background-color: #1B263B;
-                border-color: white;
-                color: white;
-            }*/
 
         .add-to-cart-btn {
-            background-color: white; /* Initial white background */
-            color: #001f3f; /* Navy blue text */
+            background-color: #fdc921;
+            color: #fff;
+            border: none;
             padding: 10px 20px;
-            border: 2px solid #001f3f; /* Navy blue border */
-            border-radius: 10px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px; /* Keep the button at the bottom */
+            right: 20px; /* Keep the button to the right */
             cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s, color 0.3s;
-            align-self: flex-start;
+            transition: background-color 0.3s;
         }
 
             .add-to-cart-btn:hover {
-                background-color: #001f3f; /* Navy blue background on hover */
-                color: white; /* White text on hover */
-                border-color: white; /* White border on hover */
-            }
-
-        .view-cart-btn {
-            position: fixed; /* Fixed position on the screen */
-            top: 50%; /* Center vertically */
-            right: 0; /* Align to the right of the screen */
-            transform: translateY(-50%); /* Adjust position to be centered vertically */
-            background-color: white; /* White background initially */
-            color: #001f3f; /* Navy blue text */
-            padding: 20px; /* Padding around the icon */
-            border: 2px solid #001f3f; /* Navy blue border */
-            font-size: 24px; /* Font size for the icon */
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
-            z-index: 1000; /* Ensures it stays above other content */
-            border-radius: 10px 0 0 10px; /* Rounded corners on the left side */
-            display: flex; /* Flexbox for vertical alignment */
-            align-items: center;
-            justify-content: center;
-            height: 160px; /* Fixed height for button */
-            width: 60px; /* Fixed width for button */
-        }
-
-            .view-cart-btn:hover {
-                background-color: #001f3f; /* Navy blue background on hover */
-                color: white; /* White text on hover */
-                border-color: white; /* White border on hover */
+                background-color: #fff2b2;
             }
     </style>
 </head>
-
 <body>
-    <center>
-        <h1>Dessert Selection</h1>
-        <form asp-action="Index" asp-controller="dessert" method="post">
+
+    <ul class="nav1">
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "food")">
+                <i class="fas fa-hamburger fa-2x"></i>
+                <div class="ps-3">
+                    <small>Food</small>
+                    <h6 class="mt-n1 mb-0">Meals</h6>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "dessert")">
+                <i class="fas fa-ice-cream fa-2x"></i>
+                <div class="ps-3">
+                    <small>Sweet</small>
+                    <h6 class="mt-n1 mb-0">Dessert</h6>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item1">
+            <a class="d-flex align-items-center text-start" href="@Url.Action("Index", "drink")">
+                <i class="fas fa-glass-martini-alt fa-2x"></i>
+                <div class="ps-3">
+                    <small>Beverages</small>
+                    <h6 class="mt-n1 mb-0">Drinks</h6>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Displaying food items -->
+    <form asp-action="login1" asp-controller="login" method="get">
+        <div class="container1">
             @if (Model.dessertItems != null && Model.dessertItems.Any())
             {
-                @foreach (var drink in Model.dessertItems)
+                @foreach (var meal in Model.dessertItems)
                 {
-                    <div class="meal-box">
-                        <div class="meal-info">
-                            <h2>@drink.productName</h2>
-                            <p>@drink.productInformation</p>
-                            <p class="price">@drink.productPrice EGP</p>
-                            <button type="button" class="add-to-cart-btn" onclick="addcart(@drink.id)">Add to Cart</button>
-                        </div>
-                        <div class="meal-image-quantity">
-                            <img src="~/images/@drink.productImage" alt="@drink.productName" />
-                            <div class="quantity-controls">
-                                <button type="button" class="quantity-btn" onclick="updateQuantity(@drink.id, -1)">-</button>
-                                <input type="text" id="quantity_@drink.id" class="quantity-input" value="1" readonly />
-                                <button type="button" class="quantity-btn" onclick="updateQuantity(@drink.id, 1)">+</button>
-                            </div>
+                    <div class="card">
+                        <img src="~/images/@meal.productImage" alt="@meal.productName" />
+                        <div class="card-content">
+                            <h2 class="card-title">@meal.productName</h2>
+                            <p class="card-text">@meal.productInformation</p>
+                            <p class="price">@meal.productPrice EGP</p>
+                            <button type="button" class="add-to-cart-btn" onclick="addcart(@meal.id)">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 }
             }
             else
             {
-                <p>No drink items available.</p>
+                <p>No food items available.</p>
             }
-        </form>
+        </div>
+    </form>
 
-        <a href="/cart" class="view-cart-btn">
-            <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
-        </a>
-    </center>
-
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         function updateQuantity(mealId, change) {
             var quantityInput = document.getElementById('quantity_' + mealId);
@@ -460,16 +516,17 @@
         }
 
         function addcart(mealId) {
-            var quantity = document.getElementById('quantity_' + mealId).value;
+            //var quantity = document.getElementById('quantity_' + mealId).value;
             var url = '@Url.Content("~/")' + "Cart/AddProductToCartAsync";
 
             $.ajax({
                 url: url,
                 type: "POST",
-                data: { id: mealId, quantity: quantity },
+                data: { id: mealId},
                 success: function (data) {
                     if (data.success) {
                         alert('Product added to cart!');
+                        updateCartCount();
                         GetTotalPrice();  // Update total price
                         Price(id);  // Update price for the specific item
                         Total();  // Update overall totals
@@ -510,7 +567,24 @@
         function Total() {
             GetTotalPrice();
         }
+
+        $(document).ready(function () {
+            // Select all cards
+            const cards = $('.card');
+
+            // Loop through each card and add the 'fade-in' class with a delay
+            cards.each(function (index) {
+                $(this).delay(index * 300).queue(function (next) {
+                    $(this).addClass('fade-in');
+                    next();
+                });
+            });
+        });
     </script>
 </body>
 </html>
+
+
+
+
 

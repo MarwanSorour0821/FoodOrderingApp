@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3zvz9E0DKsdhtYMP2Z/6MZpUvFxoi+GvXveP3N+lhwQ=",
+  "Hash": "tZSB2HnxiJXRzBcLfYIFGAyGUsRs8f0WCdxKGUhhqSk=",
   "Source": "FoodApplication",
   "BasePath": "_content/FoodApplication",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/obj/Debug/net6.0/scopedcss/projectbundle/FoodApplication.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/blueOutline.jpg",
+      "SourceId": "FoodApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/",
+      "BasePath": "_content/FoodApplication",
+      "RelativePath": "assets/blueOutline.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/blueOutline.jpg"
     },
     {
       "Identity": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/assets/dessertHoriz.png",
@@ -224,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/82092cbc-67d2-4897-b8cc-7e4a6443862d.jpeg"
+    },
+    {
+      "Identity": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/8c072e25-84a3-4390-b917-8b706f731823.jpg",
+      "SourceId": "FoodApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/",
+      "BasePath": "_content/FoodApplication",
+      "RelativePath": "images/8c072e25-84a3-4390-b917-8b706f731823.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/8c072e25-84a3-4390-b917-8b706f731823.jpg"
     },
     {
       "Identity": "/Users/marwansorour/Desktop/FoodOrderingApp/FoodApplication/wwwroot/images/ae1a43a1-f75c-441d-b061-827779ca92ce.jpg",

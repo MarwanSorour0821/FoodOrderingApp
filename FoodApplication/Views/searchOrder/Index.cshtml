@@ -1,156 +1,4 @@
-﻿@*@model IEnumerable<FoodApplication.Models.Order>
-
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Search Orders</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    background-color: #f4f4f4;
-                    color: #333;
-                    text-align: center;
-                    padding: 50px;
-                    margin: 0;
-                }
-
-                h1 {
-                    color: #002147; /* Dark Navy Blue */
-                    margin-bottom: 20px;
-                }
-
-                .search-bar {
-                    margin-bottom: 30px;
-                }
-
-                    .search-bar input[type="text"] {
-                        width: 50%;
-                        padding: 10px;
-                        font-size: 16px;
-                        border-radius: 5px;
-                        border: 1px solid #ccc;
-                    }
-
-                    .search-bar button {
-                        background-color: #002147; /* Dark Navy Blue */
-                        border: none;
-                        color: white;
-                        padding: 10px 20px;
-                        font-size: 16px;
-                        cursor: pointer;
-                        border-radius: 5px;
-                        margin-left: 10px;
-                    }
-
-                        .search-bar button:hover {
-                            background-color: #003366; /* Slightly lighter navy blue on hover */
-                        }
-
-                .order-table {
-                    width: 100%;
-                    margin-top: 20px;
-                    border-collapse: collapse;
-                    background-color: #fff;
-                }
-
-                    .order-table th, .order-table td {
-                        border: 1px solid #ddd;
-                        padding: 12px;
-                        text-align: left;
-                    }
-
-                    .order-table th {
-                        background-color: #002147; /* Dark Navy Blue */
-                        color: white;
-                    }
-
-                    .order-table tr:nth-child(even) {
-                        background-color: #f9f9f9;
-                    }
-
-                    .order-table tr:hover {
-                        background-color: #f1f1f1;
-                    }
-
-                .no-results {
-                    margin-top: 20px;
-                    font-size: 18px;
-                    color: #666;
-                }
-
-                .btn-delivered {
-                    background-color: green;
-                    border: none;
-                    color: white;
-                    padding: 10px 20px;
-                    font-size: 16px;
-                    cursor: pointer;
-                    border-radius: 5px;
-                    text-decoration: none;
-                }
-
-                    .btn-delivered:hover {
-                        background-color: darkgreen;
-                    }
-            </style>
-        </head>
-        <body>
-            <h1>Search Orders</h1>
-            <div class="search-bar">
-                <form method="get" asp-action="Index">
-                    <input type="text" name="searchString" placeholder="Enter order ID, user ID, or status..." value="@ViewData[" searchString"]" />
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-
-            @if (Model.Any())
-            {
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total Price</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var order in Model)
-                    {
-                    <tr>
-                        <td>@order.Id</td>
-                        <td>@order.userID</td>
-                        <td>@order.orderDate</td>  Formatting the date
-                        <td>
-                            @order.status
-                            @if (order.status == "Pending")
-                            {
-                                <form method="post" asp-action="UpdateStatus">
-                                    <input type="hidden" name="orderId" value="@order.Id" />
-                                    <button type="submit" class="btn-delivered">Delivered?</button>
-                                </form>
-                            }
-                        </td>
-                        <td>@order.totalPrice EGP</td>  Formatting the price as currency
-
-                    </tr>
-                    }
-                </tbody>
-            </table>
-            }
-            else
-            {
-            <p class="no-results">No orders found matching your criteria.</p>
-            }
-        </body>
-    </html>*@
-
-
-@model IEnumerable<FoodApplication.Models.Order>
+﻿@model IEnumerable<FoodApplication.Models.Order>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -267,13 +115,13 @@
             <button type="submit">Search</button>
         </form>
     </div>
-
+    <div id="ordersContainer">
     @if (Model.Any())
     {
         <table class="order-table">
             <thead>
                 <tr>
-                    <th>Order ID</th>
+                    <th>Order #</th>
                     <th>User ID</th>
                     <th>Date</th>
                     <th>Status</th>
@@ -284,7 +132,7 @@
                 @foreach (var order in Model)
                 {
                     <tr>
-                        <td>@order.Id</td>
+                        <td>@order.orderNumber</td>
                         <td>@order.userID</td>
                         <td>@order.orderDate</td> <!-- Formatting the date -->
                         <td>
@@ -296,6 +144,17 @@
                                         <input type="hidden" name="orderId" value="@order.Id" />
                                         <button type="submit" class="btn-delivered">Delivered?</button>
                                     </form>
+
+                                    <form method="post" asp-action="SendNotification">
+                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                        <button type="submit" class="btn-delivered">Notify Collection</button>
+                                    </form>
+
+                                    <form method="post" asp-action="GenerateQrCode">
+                                        <input type="hidden" name="orderId" value="@order.Id" />
+                                        <button type="submit" class="btn-delivered">Generate QR Code</button>
+                                    </form>
+
                                 }
                             </div>
                         </td>
@@ -309,6 +168,79 @@
     {
         <p class="no-results">No orders found matching your criteria.</p>
     }
+        </div>
 </body>
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.12/signalr.min.js"></script>
+
+<script>// Establish a connection to the SignalR hub
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/notificationHub")
+        .build();
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    connection.invoke("NotifyOrderUpdate").catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    // Function to handle real-time order updates
+    connection.on("ReceiveOrderUpdate", function (message) {
+        console.log("Order update received: " + message);
+        // Here you can update the UI, for example, reload the orders list or append new orders to the list
+        loadOrders();  // Define this function to reload the order data on your page
+    });
+
+    // Start the connection
+
+
+    // Function to reload orders (example)
+    function loadOrders() {
+        $.ajax({
+            url: '@Url.Action("Index", "searchOrder")', // Correct URL to fetch updated orders
+            type: 'GET',
+            success: function (data) {
+                $('#ordersContainer').html(data);  // Update the orders container with new data
+            },
+            error: function (err) {
+                console.error("Error fetching orders:", err);
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.btn-send-notification').forEach(button => {
+        button.addEventListener('click', function () {
+            const orderId = this.getAttribute('data-order-id');
+            const userEmail = this.getAttribute('data-user-email');
+
+            // Send an AJAX request to the server to send the email notification
+            $.ajax({
+                url: '@Url.Action("SendNotification", "searchOrder")', // Call the new action in the controller
+                type: 'POST',
+                data: {
+                    orderId: orderId,
+                    userEmail: userEmail
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert('Notification sent successfully.');
+                    } else {
+                        alert('Failed to send notification.');
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while sending the notification.');
+                }
+            });
+        });
+    });
+});
+
+
+
+</script>
 

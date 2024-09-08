@@ -63,6 +63,9 @@ namespace FoodApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("orderNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -96,6 +99,10 @@ namespace FoodApplication.Migrations
 
                     b.Property<int>("productID")
                         .HasColumnType("int");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("productPrice")
                         .HasColumnType("int");

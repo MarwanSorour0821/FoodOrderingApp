@@ -1,80 +1,152 @@
-﻿@*@{
-        ViewData["Title"] = "Home Page";
+﻿@*@model FoodApplication.Models.userViewModel
+    @{
+        ViewData["Title"] = "Login";
         Layout = "~/Views/Shared/loggedIN.cshtml";
     }
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Your App Name</title>
 
+        <title>Login</title>
         <style>
             body {
-                background-color: #0E0D32;
+                font-family: 'Georgia', serif;
+                background: url('/assets/blueOutline.jpg') no-repeat center center fixed;
+                background-size: cover;
+                color: white;
                 margin: 0;
                 padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
             }
 
-            .centered-text {
-                font-family: 'Georgia', Georgia;
-                font-size: 80px; /* Adjust the size as needed */
+                body::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 139, 0.5); /* Semi-transparent blue overlay */
+                    z-index: 1;
+                }
+
+            h1 {
+                font-size: 50px; /* Adjusted font size for better fit inside form */
                 text-align: center;
-                position: absolute;
-                top: 40%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: white;
+                margin-bottom: 20px;
+                color: #004E89; /* Dark Blue for the main heading inside form */
+                position: relative;
             }
 
-            .button-container {
-                position: absolute;
-                top: 50%; /* Adjust this value to move the button up or down */
-                left: 50%;
-                transform: translate(-50%, -50%);
+            form {
+                width: 800px;
                 text-align: center;
-                font-family: 'Georgia', Georgia;
-            }
-
-            .btn {
-                padding: 10px 40px; /* Adjust padding for larger button */
-                color: #0E0D32;
                 background-color: white;
-                text-decoration: none;
-                border-radius: 30px;
-                font-size: 18px; /* Adjust button font size as needed */
-                display: inline-block;
-                width: 300px; /* Adjust the width as needed */
-                text-align: center; /* Center the text within the button */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                position: relative;
+                color: #004E89;
             }
 
-                .btn:hover {
-                    background-color: #0E0D32; /* Background color change on hover */
-                    color: white; /* Text color change on hover */
-                    border: 2px solid white; /* Add a border on hover */
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+                width: 100%;
+            }
+
+            label {
+                font-size: 18px;
+                margin-bottom: 8px;
+                display: block;
+                color: #004E89;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #004E89;
+                border-radius: 5px;
+                font-size: 16px;
+                box-sizing: border-box;
+                color: #004E89;
+            }
+
+            .btn-primary {
+                background-color: #4753FA;
+                color: white;
+                padding: 15px;
+                width: 100%;
+                border: none;
+                border-radius: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+
+                .btn-primary:hover {
+                    background-color: #fdc921;
+                    color: #001845;
+                }
+
+            .form-text {
+                font-size: 12px;
+                color: #004E89;
+                text-align: left;
+                display: block;
+                margin-top: -10px;
+                margin-bottom: 10px;
+            }
+
+            a.form-text {
+                color: #004E89;
+                text-decoration: none;
+            }
+
+                a.form-text:hover {
+                    color: #fdc921;
                 }
         </style>
     </head>
     <body>
-        <div>
-            <div class="centered-text">
-                Butler & Co.
-            </div>
-
-            <div class="button-container">
-                <a href="/Login" class="btn btn-primary">Login</a>
-            </div>
+        <div class="row" id="log">
+            <form asp-controller="Login" asp-action="Login" method="post">
+                <h1>Butler & Co.</h1>  Title inside the form box
+                <div class="form-group">
+                    <label asp-for="EmployeeID">Employee ID</label>
+                    <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />
+                    <span asp-validation-for="EmployeeID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="password">Password</label>
+                    <input asp-for="password" class="form-control" type="password" placeholder="Enter your password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <a href="/ForgotPassword" class="form-text">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
         </div>
     </body>
     </html>*@
 
 @model FoodApplication.Models.userViewModel
-
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/loggedIN.cshtml";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,80 +157,95 @@
     <style>
         body {
             font-family: 'Georgia', serif;
-            background-color: #004E89; /* Dark Blue background */
-            color: #EFEFD0; /* Pale Yellow text color */
+            background: url('/assets/blueOutline.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            flex-direction: column;
+            overflow: hidden; /* Prevents scrolling due to overlay */
+            position: relative; /* Positioning context for the overlay */
+        }
+
+        /* Creating a blue dimming overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 102, 0.9); /* Semi-transparent blue */
+            z-index: 1; /* Places overlay above the background */
         }
 
         h1 {
-            font-size: 80px;
+            font-size: 50px; /* Adjusted font size for better fit inside form */
             text-align: center;
-            margin-bottom: 40px;
-            color: #EFEFD0; /* Pale Yellow for the main heading */
+            margin-bottom: 20px;
+            color: #004E89; /* Dark Blue for the main heading inside form */
         }
 
         form {
             width: 800px;
             text-align: center;
-            align-content: center;
-            background-color: #EFEFD0; /* Pale Yellow background for form */
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: #004E89; /* Dark Blue text inside the form */
+            color: #004E89;
+            position: relative; /* Ensure form stays above the overlay */
+            z-index: 2; /* Places form above the overlay */
         }
 
         .form-group {
             margin-bottom: 20px;
             text-align: left;
-            width: 100%; /* Make the form group elements take full width */
+            width: 100%;
         }
 
         label {
             font-size: 18px;
             margin-bottom: 8px;
             display: block;
-            color: #004E89; /* Dark Blue for labels */
+            color: #004E89;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #004E89; /* Dark Blue for input border */
-            background-color: #EFEFD0; /* Pale Yellow background for inputs */
+            border: 1px solid #004E89;
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
-            color: #004E89; /* Dark Blue text for inputs */
+            color: #004E89;
         }
 
         .btn-primary {
-            background-color: #004E89; /* Dark Blue for button background */
-            color: #EFEFD0; /* Pale Yellow text */
+            background-color: #fdc921;
+            color: #004E89;
             padding: 15px;
             width: 100%;
             border: none;
-            border-radius: 5px;
+            border-radius: 15px;
             font-size: 18px;
-            font-weight: bold; /* Make button text bold */
+            font-weight: bold;
             cursor: pointer;
             margin-top: 20px;
         }
 
+
             .btn-primary:hover {
-                background-color: #F7C59F; /* Light Peach on hover */
+                background-color: #004E89;
+                color: white;
             }
 
         .form-text {
             font-size: 12px;
-            color: #004E89; /* Dark Blue for helper text */
+            color: #004E89;
             text-align: left;
             display: block;
             margin-top: -10px;
@@ -166,21 +253,20 @@
         }
 
         a.form-text {
-            color: #FF6B35; /* Bright Orange for the link */
+            color: #004E89;
             text-decoration: none;
         }
 
             a.form-text:hover {
-                color: #FF6B35; /* Bright Orange on hover */
+                color: #fdc921;
             }
     </style>
 </head>
 <body>
-    <h1>Butler & Co.</h1>
-    <div class="col-md-4"></div>
-
+    <div class="overlay"></div> <!-- The blue dimming overlay -->
     <div class="row" id="log">
         <form asp-controller="Login" asp-action="Login" method="post">
+            <h1>Butler & Co.</h1> <!-- Title inside the form box -->
             <div class="form-group">
                 <label asp-for="EmployeeID">Employee ID</label>
                 <input asp-for="EmployeeID" class="form-control" type="text" placeholder="Enter your employee id" />

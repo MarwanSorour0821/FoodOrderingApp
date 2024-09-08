@@ -7,27 +7,38 @@ using Microsoft.AspNetCore.Http;
 using FoodApplication.Models;
 using Application;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.Text;
 
 namespace FoodApplication.Controllers
 {
     public class ForgotPasswordController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public ForgotPasswordController(ApplicationDbContext context)
+        public ForgotPasswordController(ApplicationDbContext context, IPasswordHasher<User> passwordHasher)
         {
+            _passwordHasher = passwordHasher;
             _context = context;
         }
 
         // GET: /ForgotPassword/
         public IActionResult Index()
         {
+            
+
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(forgotPasswordViewModel model)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             // Query the employee table directly
             var employee = _context.employees.SingleOrDefault(e => e.Id == model.EmployeeID && e.Email == model.Email);
 
@@ -54,6 +65,7 @@ namespace FoodApplication.Controllers
 
         private async Task SendOTPEmail(string email, string otp)
         {
+
             var fromAddress = new MailAddress("thetechonomicpost@gmail.com", "foodApp");
             var toAddress = new MailAddress(email);
             const string fromPassword = "jtde diti xxal cmwn";
@@ -82,12 +94,22 @@ namespace FoodApplication.Controllers
 
         public IActionResult VerifyOTP()
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult VerifyOTP(forgotPasswordViewModel model)
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var storedOtp = HttpContext.Session.GetString("OTP");
             var expiryTime = HttpContext.Session.GetString("OTPExpiry");
 
@@ -112,31 +134,85 @@ namespace FoodApplication.Controllers
 
         public IActionResult ChangePassword()
         {
+            if (HttpContext.Session.GetString("EMAIL") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(forgotPasswordViewModel model)
         {
-
             var employee = _context.employees.Where(e => e.Id == model.EmployeeID);
             var user = await _context.users.Where(a => a.EmployeeID == model.EmployeeID).FirstOrDefaultAsync();
 
             if (employee != null && user != null)
             {
-                    // TODO: Hash and set the new password
-                    user.password = model.NewPassword; // Replace with hashed password
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                // TODO: Hash and set the new password
+                user.password = Encrypt(model.NewPassword); // Replace with hashed password
+                _context.Update(user);
+                await _context.SaveChangesAsync();
 
-                    // Redirect to a confirmation page or login page
-                    return RedirectToAction("Index", "Home");
+                // Redirect to a confirmation page or login page
+                return RedirectToAction("Index", "Home");
             }
 
              ModelState.AddModelError("", "Invalid email address.");
             
 
              return View("Index", model);
+        }
+
+
+        //FOR PASSWORD ENCRYPTION/DECRYPTION    
+        private string Encrypt(string password)
+
+        {
+
+            if (string.IsNullOrEmpty(password))
+
+                return null;
+
+            else
+
+            {
+
+                byte[] storePassword = ASCIIEncoding.ASCII.GetBytes(password);
+
+                string encryptedPassword = Convert.ToBase64String(storePassword);
+
+                return encryptedPassword;
+
+            }
+
+        }
+
+        private string Decrypt(string password)
+
+        {
+
+            if (string.IsNullOrEmpty(password))
+
+            {
+
+                return null;
+
+            }
+
+            else
+
+            {
+
+                byte[] encryptedPassword = Convert.FromBase64String(password);
+
+                string decryptedPassword = ASCIIEncoding.ASCII.GetString(encryptedPassword);
+
+                return decryptedPassword;
+
+            }
+
         }
 
 
